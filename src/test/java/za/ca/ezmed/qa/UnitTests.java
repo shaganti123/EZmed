@@ -36,9 +36,9 @@ public class UnitTests {
         wdriver = new ChromeDriver();
         wdriver.manage().window().maximize();
         wdriver.manage().deleteAllCookies();
-        wdriver.get("https://ezmed.spesqa.co.za/");
+        wdriver.get("https://ezmed.spesstage.co.za/");
         loginPage = new LoginPage(this.wdriver);
-        loginPage.loginPage("laxmis@spesnet.co.za", "@QA");
+        loginPage.loginPage("laxmis@spesnet.co.za", "Nani@11october");
 
 
     }
@@ -90,10 +90,11 @@ public class UnitTests {
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
-        newPatients.searchPatient("7003045278089");
+        newPatients.searchPatient("4807135068082");
         //dashboardPage.home();
         actionButtons= new ActionButtons(this.wdriver);
         actionButtons.Claims();
+        actionButtons.FunderType("Medical Aid");
         calendar1 = new Calendar1(this.wdriver);
         calendar1.buttons("Treatment");
         calendar1.calender( "01/01/2021");

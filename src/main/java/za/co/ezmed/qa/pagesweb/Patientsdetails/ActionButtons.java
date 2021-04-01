@@ -112,6 +112,11 @@ public class ActionButtons extends BaseClass {
     @FindBy(xpath = "//input[contains(@placeholder,'Click to select Secondary ICD-10s')]")
     private WebElement SceondaryICD;
 
+    @FindBy(xpath = "//select[@ng-change='loadPatientFunders()']")
+    private WebElement FunderType;
+
+
+
 
 
 
@@ -202,12 +207,14 @@ public class ActionButtons extends BaseClass {
         List<WebElement> b = wdriver.findElements(By.xpath(xpathOfButtons));
         Waitforelement();
         Screenshot.takeScreenshot(wdriver);
-        b.get(9).click();
-        seleniumAction.waitForElementToBeClickable(CreateNewClaim);
-        Screenshot.takeScreenshot(wdriver);
-        //seleniumAction.clickWebElementObject(CreateNewClaim);
+        b.get(6).click();
         Waitforelement();
-        /* while (true)
+        seleniumAction.waitForElementToBeVisible(CreateNewClaim);
+      //  Screenshot.takeScreenshot(wdriver);
+      //  seleniumAction.waitForElementToBeClickable(CreateNewClaim);
+        seleniumAction.clickWebElementObject(CreateNewClaim);
+        Waitforelement();
+         while (true)
        {
            Select RP = new Select(ReferringP);
            Screenshot.takeScreenshot(wdriver);
@@ -215,12 +222,17 @@ public class ActionButtons extends BaseClass {
            break;
         }
 
-         */
 
 
+    }
+
+    public boolean FunderType(String FType)
+    {
+        seleniumAction.dropdownValue(FunderType, FType);
         WebElement Proceed = WebElementSearcher.elementsearchSettlementCondition(wdriver,ProceedBy);
         Screenshot.takeScreenshot(wdriver);
         seleniumAction.clickWebElementObject(Proceed);
+        return true;
     }
 
     public void Notes (String NotesHeading)
