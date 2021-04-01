@@ -115,6 +115,13 @@ public class ActionButtons extends BaseClass {
     @FindBy(xpath = "//select[@ng-change='loadPatientFunders()']")
     private WebElement FunderType;
 
+    @FindBy(xpath = "//span[@class='welcome ng-binding']")
+    private WebElement institute;
+
+    @FindBy(xpath = "//input[contains(@placeholder,'Search for Institution...')]")
+    private WebElement institutePlace;
+    @FindBy(xpath = "//div[contains(@class,'list-group-item ng-sc')]")
+    private WebElement instiSelect;
 
 
 
@@ -130,6 +137,31 @@ public class ActionButtons extends BaseClass {
 
 
     }
+
+    public boolean Institute(String institutes)
+    {
+                seleniumAction.waitForElementToBeVisible(institute);
+            String InstituionType=  institute.getText();
+            if(!InstituionType.equalsIgnoreCase("4 Wounds Wound Care Practice")) {
+                    seleniumAction.waitForElementToBeClickable(institute);
+                    seleniumAction.clickWebElementObject(institute);
+                    seleniumAction.waitForElementToBeClickable(institutePlace);
+                    institutePlace.sendKeys("4 Wounds Wound Care Practice");
+                    seleniumAction.clickWebElementObject(instiSelect);
+            }
+
+            else if (!InstituionType.equalsIgnoreCase("Lindie Pieterse Occupational Therapists"))
+            {
+                seleniumAction.waitForElementToBeClickable(institute);
+                seleniumAction.clickWebElementObject(institute);
+                seleniumAction.waitForElementToBeClickable(institutePlace);
+                institutePlace.sendKeys("Lindie Pieterse Occupational Therapists");
+                seleniumAction.clickWebElementObject(instiSelect);
+            }
+
+        return true;
+    }
+
 
     public void Summary() {
         List<WebElement> b = wdriver.findElements(By.xpath(xpathOfButtons));
@@ -238,7 +270,17 @@ public class ActionButtons extends BaseClass {
     public void Notes (String NotesHeading)
     {
         List<WebElement> b = wdriver.findElements(By.xpath(xpathOfButtons));
-        b.get(9).click();
+
+        String InstituionType=  institute.getText();
+        if(InstituionType.equalsIgnoreCase("4 Wounds Wound Care Practice"))
+        {
+            b.get(7).click();
+        }
+        else if (InstituionType.equalsIgnoreCase("Lindie Pieterse Occupational Therapists Inc"))
+        {
+            b.get(8).click();
+        }
+
         WebElement Add= WebElementSearcher.elementsearchSettlementCondition(wdriver,AddNote);
         Screenshot.takeScreenshot(wdriver);
         seleniumAction.clickWebElementObject(Add);

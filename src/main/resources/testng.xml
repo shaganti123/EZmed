@@ -10,10 +10,10 @@
             <class name="za.ca.ezmed.qa.UnitTests">
             <methods>
                 <include name="PatientRegistration"/>
-                <exclude name="CreateClaim"/>
-                <exclude name="ProvidersRegistration"/>
-                <exclude name="Funders"/>
-                <exclude name="Authorisation"/>
+                <include name="CreateClaim"/>
+                <include name="ProvidersRegistration"/>
+                <include name="Funders"/>
+                <include name="Authorisation"/>
             </methods>
         </class>
         </classes>

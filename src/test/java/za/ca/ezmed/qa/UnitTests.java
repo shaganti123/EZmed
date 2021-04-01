@@ -39,9 +39,17 @@ public class UnitTests {
         wdriver.get("https://ezmed.spesstage.co.za/");
         loginPage = new LoginPage(this.wdriver);
         loginPage.loginPage("laxmis@spesnet.co.za", "Nani@11october");
-
-
+        actionButtons = new ActionButtons(this.wdriver);
+        actionButtons.Institute("4 Wounds Wound Care Practice");
     }
+
+    /*@Test
+    public void insti()
+    {
+        actionButtons = new ActionButtons(this.wdriver);
+        actionButtons.Institute("4 Wounds Wound Care Practice");
+     }
+     */
     @Test(priority = 1)
     public void PatientRegistration() throws InterruptedException
     {
@@ -77,7 +85,7 @@ public class UnitTests {
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
-        newPatients.searchPatient("7110290295088");
+        newPatients.searchPatient("8504235846089");
         actionButtons= new ActionButtons(this.wdriver);
         actionButtons.Notes("Testing");
         actionButtons.NoteDetails("General Note" , "Public", "Laxmi Shaganti");

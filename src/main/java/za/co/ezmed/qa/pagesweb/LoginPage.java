@@ -36,6 +36,7 @@ public class LoginPage extends BaseClass
     private WebElement Logout;
 
 
+
     private By LogoutBy = By.xpath("//a[@ng-click='Logout()']");
 
 
@@ -50,7 +51,7 @@ public class LoginPage extends BaseClass
          seleniumAction= new SeleniumAction(wdriver);
     }
 
-    public void loginPage(String un, String pw) throws InterruptedException
+    public void loginPage(String un, String pw ) throws InterruptedException
     {
         WebElement username =WebElementSearcher.elementsearchSettlementCondition(wdriver,usernameBy);
         seleniumAction.typeText(username,un);
