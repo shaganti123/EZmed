@@ -40,7 +40,7 @@ public class UnitTests {
         loginPage = new LoginPage(this.wdriver);
         loginPage.loginPage("laxmis@spesnet.co.za", "Nani@11october");
         actionButtons = new ActionButtons(this.wdriver);
-        actionButtons.Institute("4 Wounds Wound Care Practice");
+        actionButtons.Institute("Lindie Pieterse Occupational Therapists Inc");
     }
 
     /*@Test

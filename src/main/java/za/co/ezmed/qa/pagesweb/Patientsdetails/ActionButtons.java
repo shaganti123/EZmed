@@ -2,6 +2,7 @@ package za.co.ezmed.qa.pagesweb.Patientsdetails;
 
 import Base.BaseClass;
 import Base.SeleniumAction;
+import org.apache.poi.hssf.record.PageBreakRecord;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -138,32 +139,24 @@ public class ActionButtons extends BaseClass {
 
     }
 
-    public boolean Institute(String institutes)
-    {
-                seleniumAction.waitForElementToBeVisible(institute);
-            String InstituionType=  institute.getText();
-            if(!InstituionType.equalsIgnoreCase("4 Wounds Wound Care Practice")) {
-                    seleniumAction.waitForElementToBeClickable(institute);
-                    seleniumAction.clickWebElementObject(institute);
-                    seleniumAction.waitForElementToBeClickable(institutePlace);
-                    institutePlace.sendKeys("4 Wounds Wound Care Practice");
-                    seleniumAction.clickWebElementObject(instiSelect);
-            }
+    public boolean Institute(String insti1){
 
-            else if (!InstituionType.equalsIgnoreCase("Lindie Pieterse Occupational Therapists"))
-            {
-                seleniumAction.waitForElementToBeClickable(institute);
-                seleniumAction.clickWebElementObject(institute);
-                seleniumAction.waitForElementToBeClickable(institutePlace);
-                institutePlace.sendKeys("Lindie Pieterse Occupational Therapists");
-                seleniumAction.clickWebElementObject(instiSelect);
-            }
 
-        return true;
+        seleniumAction.waitForElementToBeVisible(institute);
+        String InstituionType=  institute.getText();
+        if(!InstituionType.equalsIgnoreCase(insti1))
+        {
+            seleniumAction.waitForElementToBeClickable(institute);
+            seleniumAction.clickWebElementObject(institute);
+            seleniumAction.waitForElementToBeClickable(institutePlace);
+            seleniumAction.typeText(institutePlace,insti1);
+            seleniumAction.clickWebElementObject(instiSelect);
+        }
+
+       return true;
     }
 
-
-    public void Summary() {
+       public void Summary() {
         List<WebElement> b = wdriver.findElements(By.xpath(xpathOfButtons));
         b.get(0).click();
     }

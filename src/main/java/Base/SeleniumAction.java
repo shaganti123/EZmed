@@ -268,7 +268,7 @@ public class SeleniumAction
 
     public boolean waitForElementToBeVisible(Object element) {
         try {
-            WebDriverWait wait = new WebDriverWait(this.wdriver, 15L);
+            WebDriverWait wait = new WebDriverWait(this.wdriver, 30L);
             wait.until(ExpectedConditions.visibilityOf((WebElement)element));
             return true;
         } catch (Exception var3) {
