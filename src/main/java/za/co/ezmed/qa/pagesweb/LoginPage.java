@@ -53,6 +53,7 @@ public class LoginPage extends BaseClass
 
     public void loginPage(String un, String pw ) throws InterruptedException
     {
+
         WebElement username =WebElementSearcher.elementsearchSettlementCondition(wdriver,usernameBy);
         seleniumAction.typeText(username,un);
         WebElement password=WebElementSearcher.elementsearchSettlementCondition(wdriver,passwordBy);

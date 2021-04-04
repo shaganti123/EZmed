@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="EZMed Test Cases">
+    <listeners>
+        <listener class-name="za.co.ezmed.qa.utils.GenerateReport"/>
+    </listeners>
+
+    <test verbose="2" preserve-order="true" name="C:/Users/laxmis/IdeaProjects/EZmed">
+        <classes>
+            <class name="za.ca.ezmed.qa.UnitTests">
+                <methods>
+                    <include name="PatientRegistration"/>
+                    <exclude name="CreateClaim"/>
+                    <exclude name="ProvidersRegistration"/>
+                    <exclude name="Funders"/>
+                    <exclude name="Authorisation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

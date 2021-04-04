@@ -1,1 +1,0 @@
-17:48:27,258 ERROR SeleniumAction:111 - Element not successfully clicked Proxy element for: DefaultElementLocator 'By.xpath: //button[@class='btn btn-default'][2]'

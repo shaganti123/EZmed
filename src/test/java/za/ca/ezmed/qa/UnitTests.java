@@ -18,19 +18,19 @@ import java.io.File;
 public class UnitTests {
 
     private WebDriver wdriver;
-     LoginPage loginPage;
-     DashboardPage dashboardPage;
-     NewPatients newPatients;
-     GenaralDetails genaralDetails;
-     FunderDetails funderDetails;
-     ActionButtons actionButtons;
-     Calendar1 calendar1;
-     Providers providers;
+    LoginPage loginPage;
+    DashboardPage dashboardPage;
+    NewPatients newPatients;
+    GenaralDetails genaralDetails;
+    FunderDetails funderDetails;
+    ActionButtons actionButtons;
+    Calendar1 calendar1;
+    Providers providers;
 
     @BeforeMethod
     public void browserOpen() throws InterruptedException {
 
-      // System.setProperty("webdriver.chrome.driver","src"+ File.separator + "main" + File.separator + "resources" + File.separator + "Drivers" + File.separator + "chromedriver.exe");
+        // System.setProperty("webdriver.chrome.driver","src"+ File.separator + "main" + File.separator + "resources" + File.separator + "Drivers" + File.separator + "chromedriver.exe");
         System.setProperty("webdriver.chrome.driver","C://Users//laxmis//Desktop//chromedriver.exe");
 
         wdriver = new ChromeDriver();
@@ -40,7 +40,7 @@ public class UnitTests {
         loginPage = new LoginPage(this.wdriver);
         loginPage.loginPage("laxmis@spesnet.co.za", "Nani@11october");
         actionButtons = new ActionButtons(this.wdriver);
-        actionButtons.Institute("Lindie Pieterse Occupational Therapists Inc");
+        actionButtons.Institute("4 Wounds Wound Care Practice");
     }
 
     /*@Test
@@ -75,7 +75,7 @@ public class UnitTests {
         calendar1.calender("02/11/2020");
         calendar1.buttons("EFFTo");
         calendar1.calender("15/12/2022");
-       // genaralDetails.next("Save");
+        // genaralDetails.next("Save");
 
     }
 
@@ -111,7 +111,7 @@ public class UnitTests {
         actionButtons.Treatments();
         actionButtons.Icd("Code");
         actionButtons.Procedure("Desc");
-       // actionButtons.CommitClaim("Commit Only");
+        // actionButtons.CommitClaim("Commit Only");
 
 
     }
@@ -130,18 +130,18 @@ public class UnitTests {
         genaralDetails.title1("Mrs");
         genaralDetails.IdentityType("South African ID");
         genaralDetails.IdType("South African ID");
-      //  genaralDetails.countryautoSuggestion("South Africa");
-       // calendar1 = new Calendar1(this.wdriver);
-       // calendar1.buttons("DOB");
-      //  calendar1.calender("15/12/2019");
+        //  genaralDetails.countryautoSuggestion("South Africa");
+        // calendar1 = new Calendar1(this.wdriver);
+        // calendar1.buttons("DOB");
+        //  calendar1.calender("15/12/2019");
         genaralDetails.radioButton("FRadio");
         genaralDetails.PreferredContact("Email");
-       // genaralDetails.next("Save");
+        // genaralDetails.next("Save");
 
 
     }
 
-@Test(priority = 4)
+    @Test(priority = 4)
 
     public void Funders() throws InterruptedException {
         dashboardPage= new DashboardPage(this.wdriver);
@@ -203,6 +203,4 @@ public class UnitTests {
 
 
 
-    }
-
-
+}
