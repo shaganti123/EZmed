@@ -7,14 +7,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import za.co.ezmed.qa.utils.Screenshot;
+import za.co.ezmed.qa.utils.WebElementSearcher;
 
 public class NewPatients extends BaseClass {
 
-    @FindBy(xpath = "//button[@class='btn btn-success']")
-    private WebElement AddPatients;
+    //@FindBy(xpath = "")
+    //private WebElement AddPatients;
+
+    private By AddPatients = By.xpath("//button[@class='btn btn-success']");
+
 
     @FindBy(xpath = "//input[@id='txtSearchPatient']")
     private WebElement PatientSearch;
+
+    @FindBy(xpath = "//button[@id='btnDD_0']")
+    private WebElement Actions;
+
+    private By Actions1 = By.xpath("//button[@ng-click='dropdown($event)']");
 
 
 
@@ -26,18 +35,22 @@ SeleniumAction seleniumAction;
     }
 
     public boolean addpatients() throws InterruptedException {
-        Waitforelement();
-      //  seleniumAction.waitForElementToBeClickable(AddPatients);
-        //Screenshot.takeScreenshot(wdriver);
+
         Screenshot.takeScreenshot(wdriver);
-        seleniumAction.clickWebElementObject(AddPatients);
+        WebElement Add=WebElementSearcher.elementsearchSettlementCondition(wdriver,AddPatients);
+        seleniumAction.clickWebElementObject(Add);
+
         return true;
     }
 
-    public boolean searchPatient(String PId)
-    {
+    public boolean searchPatient(String PId) throws InterruptedException {
+
         seleniumAction.waitForElementToBeClickable(PatientSearch);
         seleniumAction.typeText(PatientSearch,PId);
+        //seleniumAction.clickWebElementObject(Actions);
+        Waitforelement();
+        WebElement Act =WebElementSearcher.elementsearchWithTimeLimit(wdriver,Actions1,5);
+        Act.click();
         return true;
     }
 

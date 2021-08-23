@@ -120,17 +120,17 @@ public class SeleniumAction
              return this.clickElement(webElement);
           }catch (Exception var3)
       {
-          logger.error(String.format("Element not successfully clicked %s",webElement.getTagName()));
+          logger.error(String.format("Element not successfully clicked"));
           return false;
       }
   }
     public boolean waitForElementToBeClickable(WebElement webElement) {
         try {
-            WebDriverWait wait = new WebDriverWait(this.wdriver, 12L);
+            WebDriverWait wait = new WebDriverWait(this.wdriver, 100);
             wait.until(ExpectedConditions.elementToBeClickable(webElement));
             return true;
         } catch (Exception var3) {
-            logger.error(String.format("Element did not become clickable within 12s %s", webElement));
+            logger.error(String.format("Element did not become clickable within 100s %s", webElement));
             return false;
         }
     }
@@ -389,7 +389,7 @@ public class SeleniumAction
         }
     }
 
-    public boolean scrollDownuptoEle(WebElement element, WebElement felement, WebElement melement){
+    public boolean scrollDownuptoEle(WebElement element){
         JavascriptExecutor js = (JavascriptExecutor) wdriver;
         js.executeScript("arguments[0].scrollIntoView();",element );
         return true;
@@ -399,7 +399,7 @@ public class SeleniumAction
     {
         try{
             Select select= new Select(element);
-            select.selectByVisibleText(value);
+            select. selectByVisibleText(value);
         }catch (org.openqa.selenium.StaleElementReferenceException ex) {
 
             Select select = new Select(element);

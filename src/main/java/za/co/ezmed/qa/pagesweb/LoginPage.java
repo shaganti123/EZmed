@@ -3,11 +3,16 @@ package za.co.ezmed.qa.pagesweb;
 import Base.BaseClass;
 import Base.SeleniumAction;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
+
+import java.io.*;
+import java.util.Date;
+import java.util.StringTokenizer;
 
 /**
  * @author laxmis
@@ -24,7 +29,7 @@ public class LoginPage extends BaseClass
     @FindBy(xpath = "//div[@class='portlet']//input[@id='password']")
     private WebElement password;
 
-    @FindBy(xpath = "//body//div//div//div//div//div//div//div//div//div//login-form//button[1]")
+    @FindBy(xpath = "//div//button[@type='submit']")
     private WebElement loginbutton;
 
     private By WelcomeBy = By.xpath("//a[contains(@class, 'dropdown-toggle')]");
@@ -35,14 +40,12 @@ public class LoginPage extends BaseClass
     @FindBy(xpath = "//a[@ng-click='Logout()']")
     private WebElement Logout;
 
-
+    @FindBy(xpath = "//*[@class='c-bn']")
+    private WebElement CookiesAccept;
 
     private By LogoutBy = By.xpath("//a[@ng-click='Logout()']");
 
-
         SeleniumAction seleniumAction;
-
-
 
     public LoginPage (WebDriver driver)
     {
@@ -54,27 +57,28 @@ public class LoginPage extends BaseClass
     public void loginPage(String un, String pw ) throws InterruptedException
     {
 
+
         WebElement username =WebElementSearcher.elementsearchSettlementCondition(wdriver,usernameBy);
         seleniumAction.typeText(username,un);
+        CookiesAccept.click();
         WebElement password=WebElementSearcher.elementsearchSettlementCondition(wdriver,passwordBy);
         seleniumAction.typeText(password,pw);
         Screenshot.takeScreenshot(wdriver);
-        seleniumAction.clickWebElementObject(loginbutton);
-        wdriver.navigate().to(wdriver.getCurrentUrl());
 
+       // wdriver.navigate().to(wdriver.getCurrentUrl());
+
+        seleniumAction.clickWebElementObject(loginbutton);
     }
 
     public void logout() throws InterruptedException {
-       // WebElement welcome =WebElementSearcher.elementsearchFluentWait(wdriver,usernameBy);
-        Waitforelement();
-        Waitforelement();
+        WebElement Welcome =WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,WelcomeBy,20);
+        seleniumAction.waitForElementToBeVisible(Welcome);
         seleniumAction.clickWebElementObject(Welcome);
+        WebElement Logout =WebElementSearcher.elementsearchFluentWait(wdriver,LogoutBy);
+        seleniumAction.clickWebElementObject(Logout);
         Waitforelement();
         Screenshot.takeScreenshot(wdriver);
-       // WebElement logout =WebElementSearcher.elementsearchSettlementCondition(wdriver,usernameBy);
-        seleniumAction.clickWebElementObject(Logout);
         wdriver.navigate().refresh();
-        //WebElementSearcher.elementsearchSettlementCondition(wdriver,usernameBy);
         Screenshot.takeScreenshot(wdriver);
         wdriver.close();
 

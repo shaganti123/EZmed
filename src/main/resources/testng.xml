@@ -6,16 +6,40 @@
     </listeners>
 
     <test verbose="2" preserve-order="true" name="C:/Users/laxmis/IdeaProjects/EZmed">
+        <parameter name="PID" value="860213059086"></parameter>
+        <parameter name="CTdate" value="05-Aug-2021"></parameter>
+        <parameter name="PatientFunder" value="Rand Mutual Assurance"></parameter>
+        <parameter name="IncidentDate" value="01/05/2021"></parameter>
+        <parameter name="FType" value="Medical Aid"></parameter>
+        <parameter name="MSDate" value="01/05/2020"></parameter>
+        <parameter name="MEDate" value="20/12/2021"></parameter>
+        <parameter name="IODTDate" value="02/05/2021"></parameter>
+        <parameter name="MATDate" value="05/08/2021"></parameter>
+        <parameter name="ClaimStatus" value="Claim Fully Settled"></parameter>
+        <parameter name="Action" value="Clone"></parameter>
+
         <classes>
             <class name="za.ca.ezmed.qa.UnitTests">
-            <methods>
-                <include name="PatientRegistration"/>
-                <exclude name="CreateClaim"/>
-                <exclude name="ProvidersRegistration"/>
-                <exclude name="Funders"/>
-                <exclude name="Authorisation"/>
-            </methods>
-        </class>
+                <methods>
+                    <include name="PatientRegistration"/>
+                    <include name="MedicalFunder"/>
+                    <include name="IODFunder"/>
+                    <exclude name="ProvidersRegistration"/>
+                    <exclude name="Appointment"/>
+                    <include name="Authorisation"/>
+                    <include name="CreateIODClaim"/>
+                    <include name="CreateMedicalAidClaim"/>
+                    <include name="Notes"/>
+                    <exclude name="Reports"/>
+                    <include name="AddPayment"/>
+                    <include name="CloneClaim"/>
+                    <include name="CreatePartialPayment"/>
+                    <include name="CreateFullPayment"/>
+                    <include name="DeletePatient"/>
+                    <exclude name="DeleteProvider"/>
+                </methods>
+
+            </class>
         </classes>
     </test>
 </suite>

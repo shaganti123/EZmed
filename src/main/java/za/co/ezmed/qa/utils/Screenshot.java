@@ -13,7 +13,7 @@ import java.util.Date;
 public class Screenshot
 {
 
-static Logger logger= Logger.getLogger(Screenshot.class);
+    static Logger logger= Logger.getLogger(Screenshot.class);
 
     public static void takeScreenshot(WebDriver webdriver)
     {
@@ -28,7 +28,7 @@ static Logger logger= Logger.getLogger(Screenshot.class);
         }
         catch (Exception e)
         {
-logger.info(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 }

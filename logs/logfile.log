@@ -1,0 +1,1 @@
+12:17:56,063 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (7be431bdd42e78f9b4fa6ba786694596)] -> xpath: //select[@name='PatientType']]
