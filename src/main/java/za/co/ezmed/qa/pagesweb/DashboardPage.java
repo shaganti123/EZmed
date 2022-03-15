@@ -2,10 +2,10 @@ package za.co.ezmed.qa.pagesweb;
 
 import Base.BaseClass;
 import Base.SeleniumAction;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 
@@ -14,19 +14,14 @@ public class DashboardPage extends BaseClass {
 
     @FindBy(xpath = "//div[@class='thumbnail']//i[@class='fal fa-user-md fa-4x']")
     private WebElement providers;
-
-    @FindBy(xpath = "//*[@class='c-bn']")
-    private WebElement CookiesAccept;
-    //@FindBy(xpath = "//img[@id='ezmedLogo']")
-    //private WebElement home;
     @FindBy(xpath = "//div[@class='thumbnail']//i[@class='fal fa-4x fa-user-circle']")
     private WebElement P;
     @FindBy(xpath = "//input[@id='txtSearchProvider']")
     private WebElement Provider;
 
+    @FindBy(xpath = "//*[@class='c-bn']")
+    private WebElement CookiesAccept;
     public By Home = By.xpath("//img[@id='ezmedLogo']");
-    //@FindBy(xpath = "//div[@class='thumbnail']//i[@class='fal fa-4x fa-user-circle']")
-    //  private WebElement patients;
     public By patients = By.xpath("//div[@class='thumbnail']//i[@class='fal fa-4x fa-user-circle']");
     SeleniumAction seleniumAction;
     public DashboardPage (WebDriver driver)
@@ -36,15 +31,14 @@ public class DashboardPage extends BaseClass {
     }
 
     public void patients() throws InterruptedException {
-        Waitforelement();
-        if (CookiesAccept.isDisplayed())
-        {
-            CookiesAccept.click();
-        }
-        WebElement home=WebElementSearcher.elementsearchSettlementCondition(wdriver,Home);
-        home.click();
-        Waitforelement();
-        WebElement patient=WebElementSearcher.elementsearchFluentWait(wdriver,patients);
+
+            try {
+                CookiesAccept.click();
+            } catch (Exception e) {
+
+            }
+
+        WebElement patient=WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,patients,20);
         patient.click();
     }
 

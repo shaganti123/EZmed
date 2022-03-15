@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import za.co.ezmed.qa.utils.JSWaiter;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class Clone extends BaseClass {
     String after_xpathk="]/td[6]";
     String after_sxpath="]/td[9]";
     String Button="]/td[12]/div[@class='pull-right']/button-group/div[@class='btn-group  bg']/button[2]";
-
+    String Xpathofrecords = "//ul[@role='menu']//li/descendant::button[@type='button']";
     SeleniumAction seleniumAction;
     public Clone(WebDriver driver) {
         super(driver);
@@ -25,9 +26,10 @@ public class Clone extends BaseClass {
 
     }
     public void CloneProforma(String Tdate, String Status) throws InterruptedException {
-        for( i=1; i<=10;i++) {
-            WebElementSearcher.WaitForAjax2Complete(wdriver);
-            Thread.sleep(5000);
+        List<WebElement> b = wdriver.findElements(By.xpath(Xpathofrecords));
+        for( i=1; i<=b.size();i++) {
+            JSWaiter.setDriver(this.wdriver);
+            JSWaiter.waitJQueryAngular();
             String TName = wdriver.findElement(By.xpath(brefore_xpath + i + after_xpathk)).getText();
             System.out.println(TName);
 

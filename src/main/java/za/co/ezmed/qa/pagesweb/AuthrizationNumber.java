@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import za.co.ezmed.qa.utils.JSWaiter;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 import za.co.ezmed.qa.utils.Xls_Reader;
@@ -31,19 +32,21 @@ public class AuthrizationNumber extends BaseClass {
     }
 
     public void AuthRef() {
-        Xls_Reader reader = new Xls_Reader("C:\\Users\\laxmis\\IdeaProjects\\EZmed\\src\\main\\java\\za\\co\\ezmed\\qa\\utils\\addpatients.xlsx");
+        Xls_Reader reader = new Xls_Reader( "src/main/java/za/co/ezmed/qa/utils/addpatients.xlsx");
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
         List<WebElement> b = wdriver.findElements(By.xpath(xpathOfButtons));
-        String text= b.get(6).getText();
-        System.out.println(text);
-        if(text.contains("E.O.C")){
-            b.get(7).click();
-        }
-        else if (!text.contains("E.O.C"))
+        for(int i =0;i<=b.size();i++)
         {
-            b.get(6).click();
+            String text= b.get(i).getText();
+            if(text.contains("Auth/Ref")) {
+                b.get(i).click();
+                break;
+            }
         }
+        JSWaiter.waitJQueryAngular();
         Screenshot.takeScreenshot(wdriver);
-        WebElement AddNew = WebElementSearcher.elementsearchSettlementCondition(wdriver,Add);
+        WebElement AddNew = WebElementSearcher.elementsearchFluentWait(wdriver,Add);
         Screenshot.takeScreenshot(wdriver);
         seleniumAction.clickWebElementObject(AddNew);
 
@@ -52,6 +55,7 @@ public class AuthrizationNumber extends BaseClass {
         for (int rowNum = 2; rowNum <= rowCount; rowNum++) {
             String AuthNum = reader.getCellData(sheetName, "AccountHolder", rowNum);
             String Comment=reader.getCellData(sheetName, "Insurer", rowNum);
+            JSWaiter.waitJQueryAngular();
             Auth.sendKeys(AuthNum);
             Comments.sendKeys(Comment);
             break;

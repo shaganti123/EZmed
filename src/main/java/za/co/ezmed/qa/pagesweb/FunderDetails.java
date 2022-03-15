@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import za.co.ezmed.qa.utils.JSWaiter;
 import za.co.ezmed.qa.utils.Xls_Reader;
 
 import java.util.List;
@@ -102,18 +103,16 @@ public class FunderDetails extends BaseClass {
 
 
     public boolean FunderType(String FType, String Check) throws InterruptedException {
-        Xls_Reader reader = new Xls_Reader("C:\\Users\\laxmis\\IdeaProjects\\EZmed\\src\\main\\java\\za\\co\\ezmed\\qa\\utils\\addpatients.xlsx");
-
+        Xls_Reader reader = new Xls_Reader( "src/main/java/za/co/ezmed/qa/utils/addpatients.xlsx");
         seleniumAction.clickWebElementObject(FunderType);
-        Thread.sleep(10000);
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
         seleniumAction.dropdownValue(FunderType, FType);
 
         if (FType.equalsIgnoreCase("Private Patient")) {
             String sheetName = "PrivatePatient";
-            Waitforelement();
 
             if (Check.equalsIgnoreCase("uncheck")) {
-                Waitforelement();
                 seleniumAction.clickWebElementObject(MainCheckbox);
                 Waitforelement();
                 seleniumAction.clickWebElementObject(SelectPayor);
@@ -124,12 +123,8 @@ public class FunderDetails extends BaseClass {
                     String AccountHolder = reader.getCellData(sheetName, "AccountHolder", rowNum);
                     reader.getCellData(sheetName, "Insurer", rowNum);
 
-                    Waitforelement();
                    AccountH.sendKeys(AccountHolder);
-                    Waitforelement();
-
                     seleniumAction.clickWebElementObject(Select);
-                    Waitforelement();
                     //InsurerName.sendKeys(Insurer);
 
                    // seleniumAction.scrollDown();
@@ -140,16 +135,14 @@ public class FunderDetails extends BaseClass {
 
             }
             else if (Check.equalsIgnoreCase("check"))
-                Waitforelement();
+
             {
                 int rowCount = reader.getRowCount(sheetName);
                 for (int rowNum = 2; rowNum <= rowCount; rowNum++)
                 {
                     String Account = reader.getCellData(sheetName, "AccountHolder", rowNum);
                     String Insurer = reader.getCellData(sheetName, "Insurer", rowNum);
-                    Waitforelement();
                     InsurerName.sendKeys(Insurer);
-                    Waitforelement();
                     AccountNumber.sendKeys(Account);
                     break;
                 }
@@ -158,44 +151,38 @@ public class FunderDetails extends BaseClass {
         }
 
         else if (FType.equalsIgnoreCase("Medical Aid")) {
-            Waitforelement();
             String sheetName = "PrivatePatient";
             if (Check.equalsIgnoreCase("uncheck")) {
-                Waitforelement();
                 seleniumAction.clickWebElementObject(MainCheckbox);
-                Waitforelement();
                 seleniumAction.clickWebElementObject(MainMember);
                 int rowCount = reader.getRowCount(sheetName);
                 for (int rowNum = 2; rowNum <= rowCount; rowNum++) {
                     String AccountHolder = reader.getCellData(sheetName, "AccountHolder", rowNum);
-                    Waitforelement();
                     AccountH.sendKeys(AccountHolder);
-                    Waitforelement();
                     seleniumAction.clickWebElementObject(Select);
-                    Waitforelement();
                     seleniumAction.scrollDown();
                     PatientDepNo.sendKeys("01");
-                    Waitforelement();
                     seleniumAction.scrollUp();
                     // seleniumAction.clickWebElementObject(Save);
                 }
             } else if (Check.equalsIgnoreCase("check")) {
-                Waitforelement();
+
                 MedicalAidplan.sendKeys("Discovery");
-                Thread.sleep(10000);
+                JSWaiter.setDriver(this.wdriver);
+                JSWaiter.waitJQueryAngular();
                 List<WebElement> plist = wdriver.findElements(By.xpath("//ul[@role='listbox']//li/descendant::a[@class='ng-binding ng-scope']"));
                 System.out.println(plist.size());
                 for (int i = 0; i < plist.size(); i++) {
                     if (plist.get(i).getText().equalsIgnoreCase("Discovery Health")) {
                         // String str=plist.get(i).getText();
                         //  System.out.println(str);
-                        Waitforelement();
                         plist.get(i).click();
                         break;
                     }
                 }
                 seleniumAction.clickWebElementObject(MedicalAidInsurance);
-                Thread.sleep(10000);
+                JSWaiter.setDriver(this.wdriver);
+                JSWaiter.waitJQueryAngular();
                 //wdriver.findElement(By.xpath("//input[@name='MedicalAidPlan']")).click();
                 List<WebElement> list = wdriver.findElements(By.xpath("//ul[@role='listbox']//li/descendant::a[@class='ng-binding ng-scope']"));
 
@@ -206,7 +193,6 @@ public class FunderDetails extends BaseClass {
                         break;
                     }
                 }
-                Waitforelement();
                 MedicalAidNumber.sendKeys("5281452");
                 PatientDepNo.sendKeys("00");
 
@@ -215,25 +201,17 @@ public class FunderDetails extends BaseClass {
             else if (FType.equalsIgnoreCase("Insurance"))
             {
                 String sheetName = "PrivatePatient";
-                Waitforelement();
                 if (Check.equalsIgnoreCase("uncheck")) {
-                    Waitforelement();
                     seleniumAction.clickWebElementObject(MainCheckbox);
-                    Waitforelement();
+
                     seleniumAction.clickWebElementObject(SelectPolicy);
 
                     int rowCount = reader.getRowCount(sheetName);
                     for (int rowNum = 2; rowNum <= rowCount; rowNum++)
                     {
-                        Waitforelement();
                         String AccountHolder = reader.getCellData(sheetName, "AccountHolder", rowNum);
-                        Waitforelement();
                         AccountH.sendKeys(AccountHolder);
-                        Waitforelement();
                         seleniumAction.clickWebElementObject(Select);
-                        Waitforelement();
-                        //seleniumAction.scrollDown();
-                        //      seleniumAction.clickWebElementObject(Save);
                         break;
                     }
                 }
@@ -244,11 +222,11 @@ public class FunderDetails extends BaseClass {
                     for (int rowNum = 2; rowNum <= rowCount; rowNum++)
 
                     {
-                        Waitforelement();
+
                         String PolicyNumber1 = reader.getCellData(sheetName, "AccountHolder", rowNum);
                        // String Insurer = reader.getCellData(sheetName, "Insurer", rowNum);
                        // String InsuranceOption = reader.getCellData(sheetName, "InsuranceOption", rowNum);
-                        Waitforelement();
+
                         PolicyNumber.sendKeys(PolicyNumber1);
                         seleniumAction.clickWebElementObject(InsrerClick);
 
@@ -259,7 +237,6 @@ public class FunderDetails extends BaseClass {
                             if (plist.get(i).getText().equalsIgnoreCase("African Health")) {
                                 // String str=plist.get(i).getText();
                                 //  System.out.println(str);
-                                Waitforelement();
                                 plist.get(i).click();
 
                                 break;
@@ -303,11 +280,11 @@ public class FunderDetails extends BaseClass {
                 String PC = reader.getCellData(sheetName, "PostalCode", rowNum);
                 String PV = reader.getCellData(sheetName, "Province", rowNum);
 
-                Waitforelement();
+
                 CompanyName.sendKeys(CN);
-                Waitforelement();
+
                 CompanyRegistrationNumber.sendKeys(CR);
-                Waitforelement();
+
                 Email.sendKeys(CE);
                 seleniumAction.scrollDown();
                 ComplexName.sendKeys(CoN);
@@ -316,7 +293,7 @@ public class FunderDetails extends BaseClass {
                 CityName.sendKeys(City);
                 PostalCode.sendKeys(PC);
                 Province.sendKeys(PV);
-                Waitforelement();
+
 
               /*  String cn="South";
                     wdriver.findElement(By.xpath("//input[@placeholder='Country']")).sendKeys(cn);

@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import za.co.ezmed.qa.utils.JSWaiter;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 
@@ -27,7 +30,7 @@ public class Claim extends BaseClass {
 
     private By RP = By.xpath("//select[contains(@class,'ng-empty')]");
 
-    @FindBy(xpath = "//button[@class='btn btn-success']")
+    @FindBy(xpath = "//div/div/claim/div[@class='row']/div[@class='col-md-6 col-sm-12']/ng-form/div/button[@type='button']")
     private WebElement Commit;
 
     @FindBy(xpath = "//button[@class='btn btn-success  ng-binding']")
@@ -48,48 +51,47 @@ public class Claim extends BaseClass {
         seleniumAction=new SeleniumAction(wdriver);
     }
     public void Claims() throws InterruptedException {
-        Waitforelement();
-        List<WebElement> b = wdriver.findElements(By.xpath(xpathOfButtons));
-        String text= b.get(6).getText();
-        System.out.println(text);
-        if(text.contains("E.O.C")){
-            b.get(8).click();
-        }
-        else if (!text.contains("E.O.C"))
-        {
-            b.get(7).click();
-        }
 
+        List<WebElement> b = wdriver.findElements(By.xpath(xpathOfButtons));
+        for(int i =0;i<=b.size();i++)
+        {
+            String text= b.get(i).getText();
+            if(text.contains("Claims")) {
+                b.get(i).click();
+                break;
+            }
+    }
     }
 
     public boolean CreateClaim() throws InterruptedException {
-        WebElement Create = WebElementSearcher.elementsearchFluentWait(wdriver,CreateClaim);
-        Thread.sleep(10000);
-        Create.click();
-        Waitforelement();
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
+        WebElement Create = WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,CreateClaim,20);
+        ImplicitWait();
+        seleniumAction.clickWebElementObject(Create);
         WebElement P = WebElementSearcher.elementsearchFluentWait(wdriver,RP);
        if (P.isDisplayed())
         {
             Select RP = new Select(ReferringP);
-            Screenshot.takeScreenshot(wdriver);
+           Thread.sleep(2000);
             RP.selectByIndex(1);
         }
         return true;
     }
 
     public boolean CommitClaim(String committ) throws InterruptedException {
-        Thread.sleep(5000);
-        WebElement Commit = WebElementSearcher.elementsearchFluentWait(wdriver,Committ);
-        if(!Commit.isDisplayed())
-        {
-            JavascriptExecutor js = (JavascriptExecutor) wdriver;
-            js.executeScript("window.scrollBy(0,-800)");
-        }
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitUntilAngularReady();
+
+        JavascriptExecutor jsExecuter = (JavascriptExecutor)wdriver;
+        jsExecuter.executeScript("window.scrollTo(0,document.body.scrollTop)");
+      //  ((JavascriptExecutor) wdriver).executeScript("arguments[0].scrollIntoViewIfNeeded(ture);", Commit);
         seleniumAction.clickWebElementObject(Commit);
 
         if (committ.equals("Commit Only"))
         {
-            seleniumAction.clickWebElementObject(CommitOnly);
+            ((JavascriptExecutor) wdriver).executeScript("arguments[0   ].scrollIntoViewIfNeeded(false);", CommitOnly);
+             seleniumAction.clickWebElementObject(CommitOnly);
         }
         else if (committ.equals("Submit to Funder"))
         {

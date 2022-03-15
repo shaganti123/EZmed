@@ -22,7 +22,7 @@ public class Screenshot
             TakesScreenshot screenshot=((TakesScreenshot)webdriver);
             File srcFile=screenshot.getScreenshotAs(OutputType.FILE);
             String timestamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-            String filePath="screenshots\\screenshot"+timestamp+".png";
+            String filePath="screenshots/EZMed"+timestamp+".png";
             File destFile=new File(filePath);
             FileUtils.copyFile(srcFile,destFile);
         }

@@ -34,8 +34,8 @@ public class WebElementSearcher
 
       DocumentSettleCondition <WebElement> settleCondition = new DocumentSettleCondition(ExpectedConditions.visibilityOfElementLocated(searchMethod));
       return new FluentWait<>(wdriver)
-            .withTimeout(Duration.ofMinutes(time))
-            //  .pollingEvery(settleCondition.getSettleTime(), TimeUnit.MILLISECONDS)
+            .withTimeout(Duration.ofSeconds(time))
+             // .pollingEvery(settleCondition.getSettleTime(), TimeUnit.MILLISECONDS)
               .pollingEvery(Duration.ofMillis(settleCondition.getSettleTime()))
               .ignoring(WebDriverException.class)
               .until(settleCondition);
@@ -55,7 +55,7 @@ public class WebElementSearcher
    {
       Wait<WebDriver> wait = new FluentWait<>(wdriver)
               .withTimeout(Duration.ofMinutes(1))
-              .pollingEvery(Duration.ofSeconds(5))
+              .pollingEvery(Duration.ofSeconds(2))
               .ignoring(WebDriverException.class);
 
       return
@@ -79,7 +79,7 @@ public class WebElementSearcher
 
       Wait<WebDriver> wait = new FluentWait(wdriver)
               .withTimeout(Duration.ofMinutes(maxWaitTime))
-              .pollingEvery(Duration.ofSeconds(5))
+              .pollingEvery(Duration.ofSeconds(2))
               .ignoring(WebDriverException.class);
 
       return wait.until((Function<WebDriver, WebElement>) driver ->

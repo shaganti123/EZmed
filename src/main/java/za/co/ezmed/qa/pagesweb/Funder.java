@@ -6,6 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import za.co.ezmed.qa.utils.DocumentSettleCondition;
+import za.co.ezmed.qa.utils.JSWaiter;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 
 import java.util.List;
@@ -14,7 +17,9 @@ public class Funder extends BaseClass {
     SeleniumAction seleniumAction;
     String xpathOfButtons = "//ul[@role='menu']//li/descendant::button[@type='button']";
     String xpathofdrop= "//div[contains(@class,'col-sm')]//select/descendant::option[@ng-repeat='p in PatientFunders']";
-    private By Add = By.xpath("//button/i[@class='fa fa-plus']");
+    private By Add = By.xpath("//button[@class='btn btn-success pull-right btn-margin-bottom-10']");
+   // @FindBy(xpath = "//button[@class='btn btn-success pull-right btn-margin-bottom-10']")
+   // private WebElement Add;
     private By FunderType = By.xpath("//select[@ng-change='loadPatientFunders()']");
    private By FT = By.xpath("//select[@ng-change='loadPatientFunders()']");
     @FindBy(xpath = "//select[@ng-change='loadPatientFunders()']")
@@ -29,26 +34,27 @@ public class Funder extends BaseClass {
         seleniumAction= new SeleniumAction(wdriver);
     }
     public void PatientFunders() throws InterruptedException {
-        Waitforelement();
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
         List<WebElement> b = wdriver.findElements(By.xpath(xpathOfButtons));
-        String text= b.get(1).getText();
-        System.out.println(text);
-        if(text.contains("Health")){
-        b.get(2).click();
-        }
-        else if (!text.contains("Health"))
+        for(int i =0;i<=b.size();i++)
         {
-            b.get(1).click();
+            String text= b.get(i).getText();
+            if(text.contains("Funder")) {
+                b.get(i).click();
+                break;
+            }
         }
-        WebElementSearcher.WaitForAjax2Complete(wdriver);
-        Thread.sleep(5000);
-        WebElement AddNew = WebElementSearcher.elementsearchFluentWait(wdriver,Add);
-        AddNew.click();
-
-
+        JSWaiter.waitJQueryAngular();
+        ImplicitWait();
+        WebElement AddNew = WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,Add,20);
+       // AddNew.click();
+        seleniumAction.clickWebElementObject(AddNew);
 
     }
-    public boolean FunderType(String FType) throws InterruptedException {
+    public boolean FunderType(String FType)  {
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitUntilAngularReady();
         WebElement FT = WebElementSearcher.elementsearchSettlementCondition(wdriver,FunderType);
         seleniumAction.dropdownValue(FT, FType);
         return true;
@@ -64,8 +70,8 @@ public class Funder extends BaseClass {
 
 
     public boolean Funder(String PatientFunder) throws InterruptedException {
-
-       Thread.sleep(10000);
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitUntilAngularReady();
         List<WebElement> listoption=wdriver.findElements(By.xpath(xpathofdrop));
 
         seleniumAction.clickWebElementObject(PatientFunders);

@@ -2,10 +2,13 @@ package za.co.ezmed.qa.pagesweb;
 
 import Base.BaseClass;
 import Base.SeleniumAction;
+import org.apache.poi.hssf.record.PageBreakRecord;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import za.co.ezmed.qa.utils.JSWaiter;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 
@@ -20,6 +23,10 @@ public class Notes extends BaseClass {
     @FindBy(xpath = "//input[@placeholder='Heading']")
     WebElement Heading;
 
+    String brefore_xpath="//div[@class='well blog-panel ng-scope'][";
+    String after_sxpath="]/div/div/div/div/h3";
+    String EditXpath="]/div/div[2]//button[contains(@ng-click,'ctrl.createOrUpdateNote')]";
+
     private By EP=By.xpath("//input[@role='combobox']");
     private By NoteType=By.xpath("//select[contains(@ng-model,'ctrl.patientNote.DocumentTypeGuid')]");
     //@FindBy(xpath = "//select[contains(@ng-model,'ctrl.patientNote.DocumentTypeGuid')]")
@@ -27,6 +34,11 @@ public class Notes extends BaseClass {
 
     @FindBy(xpath = "//select[contains(@ng-model,'ctrl.patientNote.NoteVisibilityType')]")
     WebElement NoteVisibility;
+    @FindBy(xpath = "//button[@uib-tooltip='Expand/Collapse panel']")
+    WebElement NV;
+
+    JavascriptExecutor executor = (JavascriptExecutor)wdriver;
+
 
     SeleniumAction seleniumAction;
     public Notes(WebDriver driver) {
@@ -36,21 +48,20 @@ public class Notes extends BaseClass {
     public void Notes ()
     {
         List<WebElement> b = wdriver.findElements(By.xpath(xpathOfButtons));
-        String text= b.get(6).getText();
-        System.out.println(text);
-        if(text.contains("E.O.C")){
-            b.get(9).click();
-        }
-        else if (!text.contains("E.O.C"))
-        {
-            b.get(8).click();
+        for(int i =0;i<=b.size();i++) {
+            String text = b.get(i).getText();
+            if (text.contains("Notes")) {
+                b.get(i).click();
+                break;
+            }
         }
 
+    }
+
+    public void AddNotes(){
         WebElement Add= WebElementSearcher.elementsearchSettlementCondition(wdriver,AddNote);
         Screenshot.takeScreenshot(wdriver);
         seleniumAction.clickWebElementObject(Add);
-
-
     }
     public void EditingPermission(String EPs) throws InterruptedException, AWTException {
         WebElement EPS= WebElementSearcher.elementsearchFluentWait(wdriver, EP);
@@ -68,7 +79,7 @@ public class Notes extends BaseClass {
     public void NoteDetails(String NType, String NVisibility,String NotesHeading) throws InterruptedException {
         Waitforelement();
         seleniumAction.typeText(Heading,NotesHeading);
-        WebElement NoteTypes= WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,NoteType,1  );
+        WebElement NoteTypes= WebElementSearcher.elementsearchFluentWait(wdriver,NoteType);
         seleniumAction. dropdownValue(NoteTypes, NType);
         Waitforelement();
         seleniumAction.dropdownValue(NoteVisibility,NVisibility);
@@ -78,4 +89,40 @@ public class Notes extends BaseClass {
         seleniumAction.typeText(Content,"Notes");
         wdriver.switchTo().defaultContent();
     }
+
+    public void Edit() throws InterruptedException {
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
+
+        for (int i = 1; i <= 5; i++) {
+            Thread.sleep(5000);
+            String text = wdriver.findElement(By.xpath(brefore_xpath + i + after_sxpath)).getText();
+            WebElement element = wdriver.findElement(By.xpath(brefore_xpath + i + EditXpath));
+            if (text.contains("Notes Version")) {
+                executor.executeScript("arguments[0].click();", element);
+                //(brefore_xpath+i+EditXpath);
+                break;
+            }
+        }
+
+    }
+    public void EditNotes(String Edit) throws InterruptedException {
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
+        if(Edit.contentEquals("Edit")){
+            Thread.sleep(2000);
+            wdriver.switchTo().frame(0);
+            seleniumAction.typeText(Content,"V2");
+            wdriver.switchTo().defaultContent();
+        }
+         if (Edit.contentEquals("Version")){
+            JSWaiter.setDriver(this.wdriver);
+            JSWaiter.waitJQueryAngular();
+            executor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+            seleniumAction.clickWebElementObject(NV);
+        }
+
+
+    }
+
 }

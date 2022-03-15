@@ -7,6 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import za.co.ezmed.qa.utils.JSWaiter;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 import za.co.ezmed.qa.utils.Xls_Reader;
@@ -18,9 +19,6 @@ public class ActionButtons extends BaseClass {
 
 
     String xpathOfButtons = "//ul[@role='menu']//li/descendant::button[@type='button']";
-    //String ICDAction = "//button[contains(@ng-click,'selectICD10')]";
-   // List<WebElement> ICD = wdriver.findElements(By.xpath(ICDAction));
-
     @FindBy(xpath = "//tbody/tr[2]/td[3]/a[1]")
     private WebElement AddDiagnosis;
 
@@ -31,16 +29,17 @@ public class ActionButtons extends BaseClass {
     private WebElement CodeSearchB;
     @FindBy(xpath = "//input[@id='txtSearchCode']")
     private WebElement PCodeEnter;
-    @FindBy(xpath = "//tbody/tr[1]/td[7]")
-    private WebElement ICDAction;
+    private By AddDiagnosisBy = By.xpath("//tbody/tr[2]/td[3]/a[1]");
+    private By ICDActionBy = By.xpath("//tbody/tr[1]/td[7]/button");
+    private By ICDCode = By.xpath("//div[@class='radio-inline fa5'][1]");
 
-    @FindBy(xpath = "//tbody/tr[1]/td[4]/button[1]")
-    private WebElement ProAction;
     //Change tr for to select another
     @FindBy(xpath = "//tbody/tr[2]/td[5]/a[1]")
-    private WebElement AddProcedure;
+    private WebElement AddPro;
 
-    //private By AddProcedure = By.xpath("//tbody/tr[2]/td[5]/a[1]");
+    private By AddProcedure = By.xpath("//tbody/tr[2]/td[5]/a[1]");
+
+    private By ProAction = By.xpath("//tbody/tr[1]/td[4]/button[1]");
     private By ProceedBy = By.xpath("//button[(@class='btn btn-success')][not(@disabled)]");
     private By Add = By.xpath("//button[contains(@class,'pull-right btn-margin-bottom-10')]");
     private By Act = By.xpath("//body/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/procedure[1]/div[1]/div[1]/div[1]/div[1]/div[2]/label[1]");
@@ -85,7 +84,8 @@ public class ActionButtons extends BaseClass {
 
             if(p.equalsIgnoreCase("Claim"))
             {
-                Thread.sleep(10000);
+                JSWaiter.setDriver(this.wdriver);
+                JSWaiter.waitUntilAngularReady();
                 WebElement Proceed = WebElementSearcher.elementsearchWithTimeLimit(wdriver,ProceedBy,5);
                 Proceed.click();
             }
@@ -101,10 +101,11 @@ public class ActionButtons extends BaseClass {
 
 
     public void Treatments() throws InterruptedException {
+        WebElement Add = WebElementSearcher.elementsearchSettlementCondition(wdriver,AddDiagnosisBy);
         JavascriptExecutor js = (JavascriptExecutor) wdriver;
         js.executeScript("arguments[0].scrollIntoView();", AddDiagnosis);
         Screenshot.takeScreenshot(wdriver);
-        seleniumAction.clickWebElementObject(AddDiagnosis);
+        seleniumAction.clickWebElementObject(Add);
         // seleniumAction.clickWebElementObject(xpathOfRadioDesc);
 
     }
@@ -114,26 +115,28 @@ public class ActionButtons extends BaseClass {
 
 
     public boolean  Icd(String IcdRadio) throws InterruptedException {
-        Xls_Reader reader = new Xls_Reader("C:\\Users\\laxmis\\IdeaProjects\\EZmed\\src\\main\\java\\za\\co\\ezmed\\qa\\utils\\addpatients.xlsx");
-        String sheetName = "ICD";
-        int rowCount = reader.getRowCount(sheetName);
+        Xls_Reader reader = new Xls_Reader("src/main/java/za/co/ezmed/qa/utils/addpatients.xlsx");
+
 
         if (IcdRadio.equalsIgnoreCase("Desc"))
         {
+            String sheetName = "Desc";
+            int rowCount = reader.getRowCount(sheetName);
             WebElement Desc = WebElementSearcher.elementsearchFluentWait(wdriver,DescRadio);
             Screenshot.takeScreenshot(wdriver);
             Desc.click();
 
             for (int rowNum = 2; rowNum <= rowCount; rowNum++)
             {
+                System.out.println(rowCount);
 
                 String IcdCode = reader.getCellData(sheetName, "IcdDesc", rowNum);
                 EnterCode.sendKeys(IcdCode);
                 seleniumAction.clickWebElementObject(CodeSearchB);
-                Thread.sleep(10000);
-               seleniumAction.clickWebElementObject(ICDAction);
-                Waitforelement();
-
+                JSWaiter.setDriver(this.wdriver);
+                JSWaiter.waitUntilAngularReady();
+                WebElement ICDAction = WebElementSearcher.elementsearchSettlementCondition(wdriver,ICDActionBy );
+                ICDAction.click();
                 break;
             }
            // seleniumAction.scrollDown();
@@ -147,10 +150,11 @@ public class ActionButtons extends BaseClass {
         }
         else if (IcdRadio.equalsIgnoreCase("Code"))
         {
-            WebElement element1 = wdriver.findElement(By.xpath("//div[@class='radio-inline fa5'][1]"));
-            Waitforelement();
+            String sheetName = "Code";
+            int rowCount = reader.getRowCount(sheetName);
+            WebElement ICDC = WebElementSearcher.elementsearchSettlementCondition(wdriver,ICDCode );
             Screenshot.takeScreenshot(wdriver);
-            seleniumAction.clickWebElementObject(element1);
+            ICDC.click();
             Waitforelement();
             seleniumAction.clickWebElementObject(EnterCode);
 
@@ -160,8 +164,8 @@ public class ActionButtons extends BaseClass {
                 Waitforelement();
                 EnterCode.sendKeys(IcdCode);
                 seleniumAction.clickWebElementObject(CodeSearchB);
-                Waitforelement();
-                seleniumAction.clickWebElementObject(ICDAction);
+                WebElement ICDAction = WebElementSearcher.elementsearchSettlementCondition(wdriver,ICDActionBy );
+                ICDAction.click();
                 Waitforelement();
                 seleniumAction.scrollDown();
                 Waitforelement();
@@ -170,44 +174,40 @@ public class ActionButtons extends BaseClass {
             }
         }
         seleniumAction.scrollDown();
-        Waitforelement();
-        seleniumAction.clickWebElementObject(AddProcedure);
-
 
         return true;
     }
 
-    public boolean Procedure(String ProcedureRadio) throws InterruptedException {
-        Thread.sleep(10000);
-        ((JavascriptExecutor) wdriver).executeScript("arguments[0].scrollIntoView(true);", AddProcedure);
-        seleniumAction.clickWebElementObject(AddProcedure);
-        Xls_Reader reader = new Xls_Reader("C:\\Users\\laxmis\\IdeaProjects\\EZmed\\src\\main\\java\\za\\co\\ezmed\\qa\\utils\\addpatients.xlsx");
-
-        String sheetName = "ICD";
-        int rowCount = reader.getRowCount(sheetName);
+    public boolean  Procedure(String ProcedureRadio) throws InterruptedException {
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitUntilAngularReady();
+        Xls_Reader reader = new Xls_Reader("src/main/java/za/co/ezmed/qa/utils/addpatients.xlsx");
 
         if (ProcedureRadio.equalsIgnoreCase("Desc"))
         {
+            String sheetName = "Desc";
+            int rowCount = reader.getRowCount(sheetName);
             for (int rowNum = 2; rowNum <= rowCount; rowNum++)
-
             {
-                WebElement Action = WebElementSearcher.elementsearchSettlementCondition(wdriver,Act);
+                JSWaiter.setDriver(this.wdriver);
+                JSWaiter.waitUntilAngularReady();
+                WebElement AddP = WebElementSearcher.elementsearchFluentWait(wdriver,AddProcedure);
+
+                try{
+                    AddP.click();
+                }catch (Exception e){
+                    ((JavascriptExecutor) wdriver).executeScript("arguments[0].scrollIntoView(true);", AddP);
+                  //  ((JavascriptExecutor) wdriver).executeScript("arguments[0].scrollIntoViewIfNeeded(true);", AddP);
+                    AddP.click();
+                }
+                WebElement Action = WebElementSearcher.elementsearchFluentWait(wdriver,Act);
                 Action.click();
-                Waitforelement();
-               // WebElement element = wdriver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/procedure[1]/div[1]/div[1]/div[1]/div[1]/div[2]/label[1]"));
-                //Waitforelement();
-            //    seleniumAction.clickWebElementObject(element);
-                Waitforelement();
                 seleniumAction.clickWebElementObject(PCodeEnter);
-                Waitforelement();
                 String ProcedureDesc = reader.getCellData(sheetName, "ProcedureDesc", rowNum);
-                Waitforelement();
                 PCodeEnter.sendKeys(ProcedureDesc);
-                Waitforelement();
                 seleniumAction.clickWebElementObject(CodeSearchB);
-                Waitforelement();
-                seleniumAction.clickWebElementObject(ProAction);
-                Waitforelement();
+                WebElement PAction = WebElementSearcher.elementsearchFluentWait(wdriver,ProAction);
+                PAction.click();
                 seleniumAction.scrollDown();
 
             }
@@ -217,56 +217,66 @@ public class ActionButtons extends BaseClass {
         }
 
         else if (ProcedureRadio.equalsIgnoreCase("Code")) {
-            WebElement element1 = wdriver.findElement(By.xpath("//div[@class='radio-inline fa5'][1]"));
-            Waitforelement();
-            seleniumAction.clickWebElementObject(element1);
-            Waitforelement();
-            seleniumAction.clickWebElementObject(EnterCode);
+            JSWaiter.setDriver(this.wdriver);
+            JSWaiter.waitUntilAngularReady();
+            String sheetName = "Code";
+            int rowCount = reader.getRowCount(sheetName);
+            for (int rowNum = 2; rowNum <= rowCount; rowNum++) {
+                JSWaiter.waitUntilAngularReady();
+                WebElement AddP = WebElementSearcher.elementsearchFluentWait(wdriver, AddProcedure);
+                try{
+                    AddP.click();
+                }catch (Exception e){
+                    ((JavascriptExecutor) wdriver).executeScript("arguments[0].scrollIntoView(true);", AddP);
+                    AddP.click();
+                }
+                    WebElement ICDC = WebElementSearcher.elementsearchFluentWait(wdriver, ICDCode);
+                    Screenshot.takeScreenshot(wdriver);
+                    ICDC.click();
+                    seleniumAction.clickWebElementObject(EnterCode);
+                    String IcdCode = reader.getCellData(sheetName, "ProcedureCode", rowNum);
+                    EnterCode.sendKeys(IcdCode);
+                    seleniumAction.clickWebElementObject(CodeSearchB);
+                    WebElement PAction = WebElementSearcher.elementsearchFluentWait(wdriver, ProAction);
+                    PAction.click();
 
-
-            for (int rowNum = 2; rowNum <= rowCount; rowNum++)
-            {
-                Waitforelement();
-                String IcdCode = reader.getCellData(sheetName, "ProcedureCode", rowNum);
-                Waitforelement();
-                EnterCode.sendKeys(IcdCode);
-                Waitforelement();
-                seleniumAction.clickWebElementObject(CodeSearchB);
-                Waitforelement();
-                seleniumAction.clickWebElementObject(ProAction);
-                Waitforelement();
-                seleniumAction.scrollDown();
 
             }
+
         }
         seleniumAction.scrollDown();
         Waitforelement();
         Screenshot.takeScreenshot(wdriver);
-        seleniumAction.scrollUp();
-        Waitforelement();
+        JSWaiter.waitUntilAngularReady();
         return true;
 
 
     }
 
     public void documents() throws IOException, InterruptedException {
-        Thread.sleep(10000);
+        JavascriptExecutor jsExecuter = (JavascriptExecutor)wdriver;
+        jsExecuter.executeScript("window.scrollTo(0,document.body.scrollTop)");
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitUntilAngularReady();
         wdriver.findElement(By.xpath("//button[@id='action']")).click();
         List<WebElement> d=wdriver.findElements(By.xpath("//label[@uib-tooltip='Upload document']"));
         System.out.println(d.size());
 
         for(int i=0;i<d.size()-1; i++)
         {
-            Thread.sleep(10000);
+           Thread.sleep(10000);
             System.out.println(i);
              d.get(i).click();
              Waitforelement();
-             Runtime.getRuntime().exec("C:\\Users\\laxmis\\Desktop\\AutoIt\\Fileupload.exe");
+             String DriverPath = System.getProperty("user.dir");
+             Runtime.getRuntime().exec("src/main/java/za/co/ezmed/qa/utils/FileUploadScript.exe"+" "+DriverPath+"/src/main/java/za/co/ezmed/qa/utils/Auth_1638866416");
              Waitforelement();
             }
         wdriver.findElement(By.xpath("//button[@class='doc-btn btn btn-default pull-right']")).click();
         seleniumAction.clickWebElementObject(Save);
             }
+
+
 }
 
 

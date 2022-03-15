@@ -4,7 +4,6 @@
     <listeners>
         <listener class-name="za.co.ezmed.qa.utils.GenerateReport"/>
     </listeners>
-
     <test verbose="2" preserve-order="true" name="C:/Users/laxmis/IdeaProjects/EZmed">
         <classes>
             <class name="za.ca.ezmed.qa.UnitTests">

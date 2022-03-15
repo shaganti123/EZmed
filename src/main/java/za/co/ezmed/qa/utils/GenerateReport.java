@@ -23,8 +23,7 @@ public class GenerateReport implements IReporter
 {
 	
 	private ExtentReports extent;
-	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites,
-			String outputDirectory) {
+	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites,String outputDirectory) {
 		extent = new ExtentReports(outputDirectory + File.separator
 				+ "Extent.html", true);
 

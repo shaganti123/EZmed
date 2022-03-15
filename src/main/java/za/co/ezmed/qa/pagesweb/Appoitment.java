@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import za.co.ezmed.qa.utils.JSWaiter;
 
 import java.util.List;
 
@@ -27,14 +29,27 @@ public class Appoitment extends BaseClass {
 
     }
     public void PatientAppointments() throws InterruptedException {
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
         List<WebElement> b = wdriver.findElements(By.xpath(xpathOfButtons));
-        b.get(3).click();
-        Waitforelement();
+        for(int i =0;i<=b.size();i++)
+        {
+            String text= b.get(i).getText();
+            if(text.contains("Appt")) {
+                b.get(i).click();
+                break;
+            }
+        }
         Actions actions = new Actions(wdriver);
-        List<WebElement> elementLocator = wdriver.findElements(By.xpath("//td[@role='gridcell'][5]"));
-        actions.doubleClick(elementLocator.get(0)).perform();
-        seleniumAction.dropdownValue(Provider,"Nombe, Velly");
-        seleniumAction.dropdownValue(PlaceofService,"Ferncrest Hospital");
+        JSWaiter.waitJQueryAngular();
+        List<WebElement> elementLocator = wdriver.findElements(By.xpath("//tbody/tr/td[@role='gridcell']"));
+        ImplicitWait();
+        actions.doubleClick(elementLocator.get(5)).perform();
+        JSWaiter.waitJQueryAngular();
+        Select P = new Select(Provider);
+        P.selectByIndex(1);
+        Select PS = new Select(PlaceofService);
+        PS.selectByIndex(1);
         seleniumAction.typeText(Title,"Automation");
 
     }

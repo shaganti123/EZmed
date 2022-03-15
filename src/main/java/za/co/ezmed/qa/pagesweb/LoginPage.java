@@ -2,17 +2,11 @@ package za.co.ezmed.qa.pagesweb;
 
 import Base.BaseClass;
 import Base.SeleniumAction;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 
-import java.io.*;
-import java.util.Date;
-import java.util.StringTokenizer;
 
 /**
  * @author laxmis
@@ -43,6 +37,7 @@ public class LoginPage extends BaseClass
     @FindBy(xpath = "//*[@class='c-bn']")
     private WebElement CookiesAccept;
 
+
     private By LogoutBy = By.xpath("//a[@ng-click='Logout()']");
 
         SeleniumAction seleniumAction;
@@ -56,17 +51,15 @@ public class LoginPage extends BaseClass
 
     public void loginPage(String un, String pw ) throws InterruptedException
     {
-
-
         WebElement username =WebElementSearcher.elementsearchSettlementCondition(wdriver,usernameBy);
         seleniumAction.typeText(username,un);
-        CookiesAccept.click();
+        try {
+            CookiesAccept.click();
+        } catch(NoSuchElementException e) {
+        }
         WebElement password=WebElementSearcher.elementsearchSettlementCondition(wdriver,passwordBy);
         seleniumAction.typeText(password,pw);
         Screenshot.takeScreenshot(wdriver);
-
-       // wdriver.navigate().to(wdriver.getCurrentUrl());
-
         seleniumAction.clickWebElementObject(loginbutton);
     }
 

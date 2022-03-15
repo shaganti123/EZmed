@@ -22,12 +22,14 @@ public class NewPatients extends BaseClass {
 
     @FindBy(xpath = "//button[@id='btnDD_0']")
     private WebElement Actions;
+    private By NoPatient = By.xpath("//td/div");
 
     private By Actions1 = By.xpath("//button[@ng-click='dropdown($event)']");
 
 
 
 SeleniumAction seleniumAction;
+
     public NewPatients(WebDriver driver)
     {
         super(driver);
@@ -35,9 +37,12 @@ SeleniumAction seleniumAction;
     }
 
     public boolean addpatients() throws InterruptedException {
+        try{
+
+        }catch (Exception e){}
 
         Screenshot.takeScreenshot(wdriver);
-        WebElement Add=WebElementSearcher.elementsearchSettlementCondition(wdriver,AddPatients);
+        WebElement Add=WebElementSearcher.elementsearchFluentWait(wdriver,AddPatients);
         seleniumAction.clickWebElementObject(Add);
 
         return true;
@@ -47,6 +52,7 @@ SeleniumAction seleniumAction;
 
         seleniumAction.waitForElementToBeClickable(PatientSearch);
         seleniumAction.typeText(PatientSearch,PId);
+        WebElement PSearch =WebElementSearcher.elementsearchWithTimeLimit(wdriver,NoPatient,5);
         //seleniumAction.clickWebElementObject(Actions);
         Waitforelement();
         WebElement Act =WebElementSearcher.elementsearchWithTimeLimit(wdriver,Actions1,5);

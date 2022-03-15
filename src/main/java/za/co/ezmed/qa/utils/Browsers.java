@@ -12,18 +12,18 @@ public class Browsers {
      SeleniumAction seleniumAction;
 
 
-    @Parameters("browser")
-    public void setup(String browser) throws Exception{
+   // @Parameters("browser")
+   /* public void setup(String browser) throws Exception{
         if(browser.equalsIgnoreCase("firefox")){
-            // System.setProperty("webdriver.chrome.driver","src"+ File.separator + "main" + File.separator + "resources" + File.separator + "Drivers" + File.separator + "chromedriver.exe");
-            System.setProperty("webdriver.chrome.driver","C://Users//laxmis//Desktop//chromedriver.exe");
+            // System.setProperty("webdriver.chrome.driver","src"+ File.separator + "main" + File.separator + "resources" + File.separator + "Drivers" + File.separator + "l.exe");
+            System.setProperty("webdriver.chrome.driver","C://Users//laxmis//Desktop//l.exe");
             wdriver = new FirefoxDriver();
             wdriver.get("https://ezmed.spesstage.co.za/");
 
         }
         else if(browser.equalsIgnoreCase("chrome")){
-            // System.setProperty("webdriver.chrome.driver","src"+ File.separator + "main" + File.separator + "resources" + File.separator + "Drivers" + File.separator + "chromedriver.exe");
-            System.setProperty("webdriver.chrome.driver","C://Users//laxmis//Desktop//chromedriver.exe");
+            // System.setProperty("webdriver.chrome.driver","src"+ File.separator + "main" + File.separator + "resources" + File.separator + "Drivers" + File.separator + "l.exe");
+            System.setProperty("webdriver.chrome.driver","C://Users//laxmis//Desktop//l.exe");
             wdriver = new ChromeDriver();
 
             wdriver.manage().window().maximize();
@@ -31,4 +31,6 @@ public class Browsers {
             wdriver.get("https://ezmed.spesstage.co.za/");
         }
     }
+
+    */
 }

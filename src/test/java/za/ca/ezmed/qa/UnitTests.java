@@ -1,15 +1,14 @@
 package za.ca.ezmed.qa;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import za.co.ezmed.qa.pagesweb.*;
+
 
 import java.awt.*;
 import java.io.File;
@@ -31,48 +30,42 @@ public class UnitTests {
     Calendar1 calendar1;
     Providers providers;
     Clone clone;
-    Institution institution;
     Funder funder;
     Claim claim;
     Appoitment appoitment;
     AuthrizationNumber authrizationNumber;
     Financials financials;
     SummaryPage summaryPage;
+    Institution institution;
+    BatchProcesses batchProcesses;
 
 
 
     @BeforeTest
-    public void browserOpen() throws InterruptedException {
+    @Parameters({"Environment","UserName","Password" })
+    public void browserOpen(String url, String UN, String PWD) throws InterruptedException {
 
         // System.setProperty("webdriver.chrome.driver","src"+ File.separator + "main" + File.separator + "resources" + File.separator + "Drivers" + File.separator + "chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver","C://Users//laxmis//Desktop//chromedriver.exe");
-        System.setProperty("webdriver.edge.driver","C://Users//laxmis//Desktop//msedgedriver.exe");
+        String DriverPath = System.getProperty("user.dir");
+        System.setProperty("webdriver.chrome.driver",DriverPath +"/src/main/resources/Drivers/chromedriver.exe");
+       // System.setProperty("webdriver.edge.driver","C://Users//laxmis//Desktop//msedgedriver.exe");
 
         wdriver = new ChromeDriver();
         //wdriver = new EdgeDriver();
         wdriver.manage().window().maximize();
-        wdriver.get("https://ezmed.spesstage.co.za");
-      /*  Cookie name = new Cookie("SignInMessage.0000", "lnbRkBJ5GN5FdpwlbpRAknRQJf8VhI22hJ7SPg_p-8LmZ3Uy6tywNUKn44Ryi6nFdQy3SuGhjS-bypphz5QqP7ZtZRaKEtsePx1Ti4GcyAYh6_v-DCebzke77kWRfDPAWtr114ExNobf1TxFnFLgKmGSEO1fqSNp5skUNPQADtqH2wdjml7ED9LVNApBHe4Mf8X0GakIOaZz531PH4MXQaIieKUc8WWQzaXzrGvv_UEWw5vOj1SLY8MghYsKtYsbAs9nTqy8f57BNteI-jFqyUqqRGCvGQe-7OgkkhSWdKYxt6wqT3GmSHwfUz0vqId85EBDWX1TUNgmNHDgJbkv1V0nO_k7GLfvWTPJjEhEjA9Y19M_ks5x4t9arNZsZ5SzRQ42TfXJ86DwgFuiE1Cj-5vnLrrgZFaR2T4LDacPkaa3CHD9wN_XEfXgu1ZZUk2Nagy4uFaSRZAbrxBRIQTVOMyXtfhUxLzAxI4LwiXBEpmeZnXMFHFB8H5pTgD6303Mwi0Wd97Polv-Y4ptapGK7iAo-MAS63E4XozoDbhVNPeIy07-SomyAxkhE7L8vaAeFXAen4DUYQjyRkULbrat7_hKIrWKBB5Ol4Nh5Wy1TVvww6NbCQmqvpWzcPDx-innKSaz6abotLNM18xHYFcY8eOQw7wZMikd-u6lbYUNYpI");
-        wdriver.manage().addCookie(name);
-        Cookie name1 = new Cookie("idsrv.xsrf", "QXNFwhc4LU1LhHzGYVHnzHH3S17ExL4wgyxcYZx02fymvjt1a4VQipMx3Q_Ln3GqYYPpRZm_P-1IQbf0UCJIybfnjC6bE91RQvac3Ah4oic");
-        wdriver.manage().addCookie(name1);
-       */
+        wdriver.get(url);
         loginPage = new LoginPage(this.wdriver);
-        loginPage.loginPage("laxmis@spesnet.co.za", "Passwordq!");
-       // institution=new Institution(this.wdriver);
-        //institution.Institute("JP Theron Clinical Psychologist ");
+        loginPage.loginPage(UN,PWD);
+
     }
 
-    /*@Test
-    public void insti()
-    {
-        actionButtons = new ActionButtons(this.wdriver);
-        actionButtons.Institute("4 Wounds Wound Care Practice");
-     }
-     */
+
 
     @Test(priority = 1)
-    public void PatientRegistration() throws InterruptedException, AWTException {
+    @Parameters({"OT"})
+    public void PatientRegistration(String Ins) throws InterruptedException, AWTException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -99,9 +92,11 @@ public class UnitTests {
     }
 
 
-    @Test(priority = 2)
-    @Parameters({"PID", "PatientFunder","IncidentDate"})
-    public void IODFunder(String PID, String PatientFunder, String IncidentDate) throws InterruptedException, AWTException {
+    @Test(priority = 3)
+    @Parameters({"PID", "PatientFunder","IncidentDate","OT"})
+    public void IODFunder(String PID, String PatientFunder, String IncidentDate, String Ins) throws InterruptedException, AWTException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -120,9 +115,11 @@ public class UnitTests {
         genaralDetails.next("Save");
     }
 
-    @Test(priority = 3)
-    @Parameters({"PID","FType","MSDate", "MEDate"})
-    public void MedicalFunder(String PID, String FType, String SDate, String EDate) throws InterruptedException {
+    @Test(priority = 2)
+    @Parameters({"PID","FType","MSDate", "MEDate","OT"})
+    public void MedicalFunder(String PID, String FType, String SDate, String EDate,String Ins) throws InterruptedException, AWTException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -149,7 +146,7 @@ public class UnitTests {
         providers= new Providers(this.wdriver);
         providers.addProvider();
         genaralDetails= new GenaralDetails(this.wdriver);
-        genaralDetails.ProviderCheckBoxType("TreatingProvider");
+        genaralDetails.ProviderCheckBoxType("ReferringProvider");
         genaralDetails.LinkPlace();
         genaralDetails.title1("Mrs");
         genaralDetails.IdentityType("Passport");
@@ -165,8 +162,10 @@ public class UnitTests {
     }
 
     @Test(priority = 5)
-    @Parameters({"PID"})
-    public void Appointment(String PID) throws InterruptedException {
+    @Parameters({"PID","OT"})
+    public void Appointment(String PID,String Ins) throws InterruptedException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -175,17 +174,19 @@ public class UnitTests {
         appoitment.PatientAppointments();
         calendar1 = new Calendar1(this.wdriver);
         calendar1.buttons("Start");
-        calendar1.calender("30/04/2021");
+        calendar1.calender("01/03/2022");
         calendar1.StartTime("11","00");
         calendar1.buttons("End");
-        calendar1.calender("30/04/2021");
+        calendar1.calender("01/03/2022");
         calendar1.EndTime("11","30");
 
     }
 
     @Test(priority = 6)
-    @Parameters({"PID"})
-    public void Authorisation(String PID) throws InterruptedException {
+    @Parameters({"PID","OT"})
+    public void Authorisation(String PID,String Ins) throws InterruptedException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -203,9 +204,10 @@ public class UnitTests {
     }
 
     @Test(priority =7)
-    @Parameters({"PID","IODTDate"})
-    public void CreateIODClaim(String PID, String IODTDate) throws InterruptedException, IOException {
-
+    @Parameters({"PID","IODTDate","OT"})
+    public void CreateIODClaim(String PID, String IODTDate, String Ins ) throws InterruptedException, IOException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -233,10 +235,11 @@ public class UnitTests {
 
     }
 
-    @Test(priority = 8)
-    @Parameters({"PID", "MATDate"})
-    public void CreateMedicalAidClaim(String PID, String MATDate)throws InterruptedException {
-
+    @Test(priority =8)
+    @Parameters({"PID", "MATDate","PhysioIns"})
+    public void PhysioCreateMedicalAidClaim(String PID, String MATDate, String Ins)throws InterruptedException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -253,43 +256,103 @@ public class UnitTests {
         calendar1.buttons("Treatment");
         calendar1.calender( MATDate);
         calendar1.StartTime("10","00");
-        calendar1.EndTime1("10","30");
+        calendar1.EndTimeEme("10","30");
         actionButtons.Treatments();
         actionButtons.Icd("Code");
         actionButtons.Procedure("Code");
-        claim.CommitClaim("Submit to Funder");
+        financials = new Financials(this.wdriver);
+        financials.AssertAmount();
+        claim.CommitClaim("Commit Only");
+    }
 
 
+
+    @Test()
+    @Parameters({"PID", "MATDate"})
+    public void PCreateMedicalAidClaim(String PID, String MATDate)throws InterruptedException {
+    //    institution=new Institution(this.wdriver);
+      //  institution.Institute(Ins);
+        dashboardPage= new DashboardPage(this.wdriver);
+        dashboardPage.patients();
+        newPatients = new NewPatients(this.wdriver);
+        newPatients.searchPatient(PID);
+        // dashboardPage.home();
+        claim=new Claim(this.wdriver);
+        claim.Claims();
+        claim.CreateClaim();
+        funder = new Funder(this.wdriver);
+        funder.FunderType("Medical Aid");
+        actionButtons= new ActionButtons(this.wdriver);
+        actionButtons.proceed("Claim");
+        calendar1 = new Calendar1(this.wdriver);
+        calendar1.buttons("Treatment");
+        calendar1.calender( MATDate);
+        calendar1.StartTime("10","00");
+        calendar1.EndTimeEme("10","30");
+        actionButtons.Treatments();
+        actionButtons.Icd("Code");
+        actionButtons.Procedure("Code");
+       // financials = new Financials(this.wdriver);
+       // financials.AssertAmount();
+        claim.CommitClaim("Commit Only");
     }
 
      @Test(priority = 9)
-    @Parameters({"PID"})
-    public void Notes(String PID) throws InterruptedException, AWTException {
+    @Parameters({"PID","OT"})
+    public void Notes(String PID, String Ins) throws InterruptedException, AWTException {
+         institution=new Institution(this.wdriver);
+         institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
         newPatients.searchPatient(PID);
         notes= new Notes(this.wdriver);
         notes.Notes();
-        notes.NoteDetails("General Note" , "Public","Laxmi-Test");
+        notes.AddNotes();
+        notes.NoteDetails("General Note" , "Public","Notes Version");
         notes.EditingPermission("Laxmi Shaganti");
         genaralDetails= new GenaralDetails(this.wdriver);
         genaralDetails.next("Save");
 
     }
 
-
     @Test(priority = 10)
-    public void Reports() throws InterruptedException {
+    @Parameters({"PID","OT"})
+    public void NotesVersion(String PID, String Ins) throws InterruptedException, AWTException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
+        dashboardPage= new DashboardPage(this.wdriver);
+        dashboardPage.patients();
+        newPatients = new NewPatients(this.wdriver);
+        newPatients.searchPatient(PID);
+        notes= new Notes(this.wdriver);
+        notes.Notes();
+        notes.Edit();
+        notes.EditNotes("Edit");
+        genaralDetails= new GenaralDetails(this.wdriver);
+        genaralDetails.next("Save");
+        notes.Edit();
+        notes.EditNotes("Version");
+
+
+    }
+
+    @Test(priority = 11)
+    @Parameters({"PID", "MATDate","PhysioIns"})
+    public void Reports(String Ins) throws InterruptedException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         Reports reports=new Reports(this.wdriver);
         reports.Dashboard();
         reports.AllReports("AuthReport","ThisMonth");
         reports.RType("PDF");
     }
 
-    @Test(priority = 11)
-    @Parameters({"PID"})
-    public void AddPayment(String PID) throws InterruptedException {
+    @Test()
+    @Parameters({"PID", "OT"})
+    public void AddPayment(String PID, String Ins) throws InterruptedException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -298,11 +361,17 @@ public class UnitTests {
         financials.Financial();
         financials.AddPayments("EFT");
         financials.FullPayment();
+      //  financials.MenuItems("Reconcile");
+       // financials.reconcile();
+       // genaralDetails= new GenaralDetails(this.wdriver);
+       // genaralDetails.next("Save");
 
     }
     @Test(priority = 12)
-    @Parameters({"PID", "CTdate","ClaimStatus", "Action"})
-    public void CloneClaim(String PID, String CTdate, String ClaimStatus, String Action) throws InterruptedException, IOException {
+    @Parameters({"PID", "CTdate","ClaimStatus", "Action","OT"})
+    public void CloneClaim(String PID, String CTdate, String ClaimStatus, String Action, String Ins) throws InterruptedException, IOException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -312,8 +381,8 @@ public class UnitTests {
         clone=new Clone(this.wdriver);
         clone.CloneProforma(CTdate,ClaimStatus);
         clone.action(Action);
-        funder = new Funder(this.wdriver);
-        funder.Funder("Discovery");
+       // funder = new Funder(this.wdriver);
+        //funder.Funder("Discovery");
         calendar1 = new Calendar1(this.wdriver);
         calendar1.buttons("Treatment");
         calendar1.calender( "10/08/2021");
@@ -322,27 +391,42 @@ public class UnitTests {
         calendar1.EndTime1("10","30");
         actionButtons= new ActionButtons(this.wdriver);
         actionButtons.proceed("Clone");
-        // actionButtons.documents();
+         actionButtons.documents();
         claim.CommitClaim("Submit to Funder");
 
     }
 
     @Test(priority = 13)
-    @Parameters({"PID"})
-    public void CreatePartialPayment(String PID) throws InterruptedException {
+    @Parameters({"OT"})
+    public void BatchProcess(String Ins) throws InterruptedException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
+        batchProcesses = new BatchProcesses(this.wdriver);
+        batchProcesses.BatchP();
+        batchProcesses.Statements("Nombe, Velly");
+        batchProcesses.ProcessQ();
+        batchProcesses.MassageSubject("Statement from","Nombe, Velly");
+
+
+
+    }
+
+    @Test()
+    @Parameters({"PID","OT"})
+    public void CreatePartialPayment(String PID, String Ins) throws InterruptedException {
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
         newPatients.searchPatient(PID);
-        claim=new Claim(this.wdriver);
-        claim.Claims();
         financials = new Financials(this.wdriver);
-        financials.ClaimRef("Fund - Not Payable");
+        financials.Financial();
 
     }
     @Test(priority = 14)
-    @Parameters({"PID"})
-    public void CreateFullPayment(String PID) throws InterruptedException {
+    @Parameters({"PID","OT"})
+    public void CreateFullPayment(String PID, String Ins) throws InterruptedException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -350,13 +434,15 @@ public class UnitTests {
         financials = new Financials(this.wdriver);
         financials.Financial();
         financials.AddPayments("EFT");
-        financials.FullPayment();
+       // financials.FullPayment();
 
     }
 
-    @Test(priority = 14)
-    @Parameters({"PID"})
-    public void DeletePatient(String PID) throws InterruptedException {
+    @Test(priority = 15)
+    @Parameters({"PID", "OT"})
+    public void DeletePatient(String PID, String Ins) throws InterruptedException {
+        institution=new Institution(this.wdriver);
+        institution.Institute(Ins);
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.patients();
         newPatients = new NewPatients(this.wdriver);
@@ -367,7 +453,7 @@ public class UnitTests {
     }
 
 
-    @Test(priority = 15)
+    @Test(priority = 16)
     public void DeleteProvider() throws InterruptedException {
         dashboardPage= new DashboardPage(this.wdriver);
         dashboardPage.Providers();
@@ -376,8 +462,6 @@ public class UnitTests {
         summaryPage.DeleteProvider();
 
     }
-
-
 
     @Test()
     @Parameters({"PID"})
@@ -413,6 +497,9 @@ public class UnitTests {
             FileUtils.copyFile(srcFile,destFile);
         }
     }
+
+
+
 
 
 

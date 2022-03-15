@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import za.co.ezmed.qa.utils.JSWaiter;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 import za.co.ezmed.qa.utils.Xls_Reader;
@@ -109,7 +110,8 @@ public class GenaralDetails extends BaseClass {
 
 
     SeleniumAction seleniumAction;
-    Xls_Reader reader = new Xls_Reader("C:\\Users\\laxmis\\IdeaProjects\\EZmed\\src\\main\\java\\za\\co\\ezmed\\qa\\utils\\addpatients.xlsx");
+    //String projectPath = System.getProperty("user.dir");
+    Xls_Reader reader = new Xls_Reader( "src/main/java/za/co/ezmed/qa/utils/addpatients.xlsx");
 
 
     public GenaralDetails(WebDriver driver)
@@ -142,26 +144,17 @@ public class GenaralDetails extends BaseClass {
                 String Ema= reader.getCellData(sheetName, "Email", rowNum);
                //String BN = reader.getCellData(sheetName, "BHFNumber",rowNum);
 
-                Waitforelement();
+
                 Initials.sendKeys(IN);
-                Waitforelement();
                 FirstName.sendKeys(FN);
-                Waitforelement();
                 LastName.sendKeys(LN);
-                Waitforelement();
             //   BHFNumber.sendKeys(BN);
                 IdNumber.sendKeys(IDN);
-                Waitforelement();
                 ComplexName.sendKeys(CN);
-                Waitforelement();
                 UnitNo.sendKeys(UN);
-                Waitforelement();
                 StreetName.sendKeys(SN);
-                Waitforelement();
                 CityName.sendKeys(City);
-                Waitforelement();
                 PostalCode.sendKeys(PC);
-                Waitforelement();
                 Province.sendKeys(PV);
                // Waitforelement();
                 //BHFNumber.sendKeys(BN);
@@ -185,18 +178,13 @@ public class GenaralDetails extends BaseClass {
                 String BN = reader.getCellData(sheetName, "BHFNumber",rowNum);
 
 
-                Waitforelement();
+
                 Initials.sendKeys(IN);
-                Waitforelement();
                 FirstName.sendKeys(FN);
-                Waitforelement();
                 LastName.sendKeys(LN);
-                Waitforelement();
                 IdNumber.sendKeys(IDN);
-                Waitforelement();
                 PhysicalAddress.sendKeys(PA);
                 wdriver.findElements(By.cssSelector(".pac-item")).get(0).click();
-                Waitforelement();
                 BHFNumber.sendKeys(BN);
             }
         }
@@ -206,7 +194,8 @@ public class GenaralDetails extends BaseClass {
 
     public void countryautoSuggestion(String cn) throws InterruptedException, AWTException {
         wdriver.findElement(By.xpath("//input[@placeholder='Country']")).sendKeys(cn);
-        Thread.sleep(10000);
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
         List<WebElement> list = wdriver.findElements(By.xpath("//ul[@role='listbox']//li/descendant::a[@class='ng-binding ng-scope']"));
         //System.out.println(list);
 
@@ -243,7 +232,7 @@ public class GenaralDetails extends BaseClass {
     public void LinkPlace() throws InterruptedException {
         Waitforelement();
         seleniumAction.clickWebElementObject(LinkPlaceOfService);
-        SearchPlaces.sendKeys("Ferncrest Hospital");
+        SearchPlaces.sendKeys("Curae Occupational Therapy");
         Waitforelement();
         Select.click();
     }
@@ -306,7 +295,8 @@ public class GenaralDetails extends BaseClass {
         else if(Check.equalsIgnoreCase("TreatingProvider"))
         {
             List<WebElement> c = wdriver.findElements(By.xpath(xpathOfCheck));
-            Waitforelement();
+            JSWaiter.setDriver(this.wdriver);
+            JSWaiter.waitUntilAngularReady();
             c.get(2).click();
             seleniumAction.clickWebElementObject(Accept);
             BHFNumber.sendKeys("1253025");
@@ -332,6 +322,8 @@ public class GenaralDetails extends BaseClass {
 
     }
 public void next(String next) throws InterruptedException {
+    JSWaiter.setDriver(this.wdriver);
+    JSWaiter.waitUntilAngularReady();
         if (next.equalsIgnoreCase("Next"))
         {
             seleniumAction.scrollDown();
@@ -341,7 +333,7 @@ public void next(String next) throws InterruptedException {
     else if(next.equalsIgnoreCase("Save"))
        {
            Save.click();
-           Screenshot.takeScreenshot(wdriver);
+
        }
 
 }

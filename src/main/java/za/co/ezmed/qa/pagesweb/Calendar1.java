@@ -5,12 +5,12 @@ import Base.SeleniumAction;
 import org.apache.commons.lang3.event.EventListenerSupport;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import za.co.ezmed.qa.utils.JSWaiter;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class Calendar1 extends BaseClass {
     SeleniumAction seleniumAction;
@@ -54,8 +54,12 @@ public class Calendar1 extends BaseClass {
     @FindBy(xpath = "//button[contains(text(),'Cancel')]")
     private WebElement Cancel;
 
-    List<WebElement> Cbutton= wdriver.findElements(By.xpath("//span[@class='input-group-btn']//button[@class='btn btn-default']"));
+    @FindBy(xpath = "//div[@ng-if='showEmergencyCheck']")
+    private WebElement Emergency;
+    @FindBy(xpath = "//button[@ng-class='item.class'][2]")
+    private WebElement Accept;
 
+    List<WebElement> Cbutton= wdriver.findElements(By.xpath("//span[@class='input-group-btn']//button[@class='btn btn-default']"));
 
     public Calendar1(WebDriver driver)
     {
@@ -65,10 +69,12 @@ public class Calendar1 extends BaseClass {
     }
 
     public  void buttons(String CalenderIcon) throws InterruptedException {
-        Waitforelement();
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
         if(CalenderIcon.equalsIgnoreCase("DOB"))
         {
-            Waitforelement();
+            JSWaiter.setDriver(this.wdriver);
+            JSWaiter.waitJQueryAngular();
             seleniumAction.clickWebElementObject(DOB);
         }
         else if (CalenderIcon.equalsIgnoreCase("Start"))
@@ -83,7 +89,9 @@ public class Calendar1 extends BaseClass {
         }
         else if (CalenderIcon.equalsIgnoreCase("Treatment"))
         {
-         WebElement Treat= WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,TreatmentStart,5);
+            JSWaiter.setDriver(this.wdriver);
+            JSWaiter.waitJQueryAngular();
+         WebElement Treat= WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,TreatmentStart,20);
             Treat.click();
         }
         else if (CalenderIcon.equalsIgnoreCase("EFFFrom"))
@@ -195,10 +203,22 @@ public class Calendar1 extends BaseClass {
         js.executeScript("arguments[0].scrollIntoView();", Confirm);
         seleniumAction.clickWebElementObject(Confirm);
 
+    }
+    public void EndTimeEme(String Hr, String min) {
+        JavascriptExecutor js = (JavascriptExecutor) wdriver;
+        seleniumAction.clickWebElementObject(Endtime);
+        HR.clear();
+        seleniumAction.typeText(HR, Hr);
+        MM.clear();
+        seleniumAction.typeText(MM, min);
+        seleniumAction.scrollDown();
+        seleniumAction.clickWebElementObject(DoneButton);
+        Emergency.click();
+        js.executeScript("arguments[0].scrollIntoView();", Accept);
+        seleniumAction.clickWebElementObject(Accept);
+        js.executeScript("arguments[0].scrollIntoView();", Confirm);
+        seleniumAction.clickWebElementObject(Confirm);
 
     }
-
-
-
 
 }
