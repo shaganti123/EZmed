@@ -39,6 +39,7 @@ public class LoginPage extends BaseClass
 
 
     private By LogoutBy = By.xpath("//a[@ng-click='Logout()']");
+    public By Home = By.xpath("//div[@class='navbar-header hidden-xs']/a");
 
         SeleniumAction seleniumAction;
 
@@ -57,10 +58,12 @@ public class LoginPage extends BaseClass
             CookiesAccept.click();
         } catch(NoSuchElementException e) {
         }
-        WebElement password=WebElementSearcher.elementsearchSettlementCondition(wdriver,passwordBy);
+        WebElement password=WebElementSearcher.elementsearchFluentWait(wdriver,passwordBy);
         seleniumAction.typeText(password,pw);
         Screenshot.takeScreenshot(wdriver);
         seleniumAction.clickWebElementObject(loginbutton);
+        WebElement home=WebElementSearcher.elementsearchSettlementCondition(wdriver,Home);
+        home.click();
     }
 
     public void logout() throws InterruptedException {

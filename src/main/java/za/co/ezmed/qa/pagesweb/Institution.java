@@ -3,6 +3,7 @@ package za.co.ezmed.qa.pagesweb;
 import Base.BaseClass;
 import Base.SeleniumAction;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,17 +22,19 @@ public class Institution  extends BaseClass {
     private WebElement institute;
 
     public By institutes = By.xpath("//div/span[@class='welcome ng-binding']");
-    public By Home = By.xpath("//div[@class='navbar-header hidden-xs']/a");
+    public By Home = By.xpath("//div[@class='navbar-header hidden-xs']/a/img");
     @FindBy(xpath = "//input[contains(@placeholder,'Search for Institution...')]")
     private WebElement institutePlace;
     @FindBy(xpath = "//div[contains(@class,'list-group-item ng-sc')][1]")
     private WebElement instiSelect;
 
     public void Institute(String Ins) throws InterruptedException {
-        //JSWaiter.setDriver(this.wdriver);
-       // JSWaiter.waitUntilAngularReady();
-        WebElement home=WebElementSearcher.elementsearchSettlementCondition(wdriver,Home);
-        home.click();
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
+        ImplicitWait();
+        WebElement home=WebElementSearcher.elementsearchFluentWait(wdriver,Home);
+       seleniumAction.clickWebElementObject(home);
+        JSWaiter.waitUntilAngularReady();
         WebElement INS = WebElementSearcher.elementsearchFluentWait(wdriver, institutes);
         String InstituionName = INS.getText();
         if (InstituionName.contains(Ins)==false) {

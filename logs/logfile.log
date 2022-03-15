@@ -1,14 +1,12 @@
-14:10:44,691 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (cf9c578f1c196746a90fd2141dec74d9)] -> xpath: //select[@name='PatientType']]
-14:11:57,021 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (cf9c578f1c196746a90fd2141dec74d9)] -> xpath: //select[@name='PatientType']]
-14:23:03,505 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (cf9c578f1c196746a90fd2141dec74d9)] -> xpath: //button[@id='selAll']]
-14:23:05,453 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (cf9c578f1c196746a90fd2141dec74d9)] -> xpath: //button/span[contains(text(),'Execute Job')]]
-14:25:10,770 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
-14:25:10,773 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
-14:25:10,776 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
-14:25:10,777 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
-14:25:10,777 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
-14:25:11,333 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
-14:25:11,334 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
-14:25:11,335 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
-14:25:11,335 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
-14:25:11,335 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
+18:22:12,358 ERROR SeleniumAction:198 - Text not successfully typed into textfield Notes
+18:24:02,263 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (bd5058edc8757589205d65571da88062)] -> xpath: //button[contains(text(),'Create')]]
+18:27:17,531 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
+18:27:17,532 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
+18:27:17,533 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
+18:27:17,533 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
+18:27:17,534 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
+18:27:17,831 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
+18:27:17,832 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
+18:27:17,832 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
+18:27:17,832 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
+18:27:17,832 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"

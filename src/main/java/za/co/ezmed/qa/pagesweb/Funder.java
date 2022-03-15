@@ -3,6 +3,7 @@ package za.co.ezmed.qa.pagesweb;
 import Base.BaseClass;
 import Base.SeleniumAction;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,6 +29,7 @@ public class Funder extends BaseClass {
     private WebElement PatientFunders;
     @FindBy(xpath = "//select[contains(@ng-model,'ngModel.Incident.PatientEmployer')]")
     private  WebElement Funders;
+    JavascriptExecutor js = (JavascriptExecutor) wdriver;
 
     public Funder(WebDriver driver) {
         super(driver);
@@ -45,11 +47,10 @@ public class Funder extends BaseClass {
                 break;
             }
         }
-        JSWaiter.waitJQueryAngular();
-        ImplicitWait();
-        WebElement AddNew = WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,Add,20);
+        JSWaiter.waitUntilAngularReady();
+        WebElement AddNew = WebElementSearcher.elementsearchFluentWait(wdriver,Add);
        // AddNew.click();
-        seleniumAction.clickWebElementObject(AddNew);
+        js.executeScript("arguments[0].click()", AddNew);
 
     }
     public boolean FunderType(String FType)  {

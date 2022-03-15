@@ -50,8 +50,7 @@ public class BatchProcesses extends BaseClass {
     @FindBy(xpath = "//button/span[contains(text(),'Execute Job')]")
     private WebElement ExecuteJob;
     public By Last = By.xpath("//ul[@role='menu']//li/descendant::a[contains(text(),'Last')]");
-    @FindBy(xpath = "//button[@id='selAll']")
-    private WebElement SelAll;
+    public By SelAll = By.xpath("//button[@id='selAll']");
     @FindBy(xpath = "//ul[@class='nav navbar-nav navbar-right']//li/descendant::a/span/i[@class='fal fa-3x fa-envelope']")
     private WebElement Inbox;
 
@@ -72,7 +71,7 @@ public class BatchProcesses extends BaseClass {
         } catch (Exception e) {
 
         }
-        WebElement Batch = WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver, BatchProcessing,20);
+        WebElement Batch = WebElementSearcher.elementsearchSettlementCondition(wdriver, BatchProcessing);
         JavascriptExecutor js = (JavascriptExecutor)wdriver;
         js.executeScript("arguments[0].click()", Batch);
         JSWaiter.setDriver(this.wdriver);
@@ -80,6 +79,8 @@ public class BatchProcesses extends BaseClass {
     }
     public void Statements(String PatientName)
     {
+
+        JavascriptExecutor executor = (JavascriptExecutor)wdriver;
         int i;
         JSWaiter.setDriver(this.wdriver);
         JSWaiter.waitJQueryAngular();
@@ -89,12 +90,12 @@ public class BatchProcesses extends BaseClass {
         JSWaiter.waitJQueryAngular();
         seleniumAction.clickWebElementObject(Search);
         JSWaiter.waitJQueryAngular();
+        WebElement select = WebElementSearcher.elementsearchSettlementCondition(wdriver, SelAll);
+        executor.executeScript("arguments[0].scrollIntoView(true);",select);
+        executor.executeScript("arguments[0].click()", select);
         WebElement Lasts = WebElementSearcher.elementsearchSettlementCondition(wdriver, Last);
-        JavascriptExecutor executor = (JavascriptExecutor)wdriver;
         executor.executeScript("arguments[0].scrollIntoView(true);",Lasts);
         seleniumAction.clickWebElementObject(Lasts);
-        JSWaiter.waitJQueryAngular();
-        seleniumAction.clickWebElementObject(SelAll);
         JSWaiter.waitJQueryAngular();
         List<WebElement> b = wdriver.findElements(By.xpath(XpathOfChecks));
         for( i=1; i<=b.size();i++) {
@@ -105,6 +106,7 @@ public class BatchProcesses extends BaseClass {
            b.get(i-1).click();
        }
         }
+        executor.executeScript("window.scrollTo(0,document.body.scrollTop)");
        seleniumAction.clickWebElementObject(ExecuteJob);
 
     }
@@ -119,7 +121,7 @@ public class BatchProcesses extends BaseClass {
         List<WebElement> r = wdriver.findElements(By.xpath(RadioButtons));
         r.get(1).click();
         seleniumAction.clickWebElementObject(Search);
-        WebElement JobStatus = WebElementSearcher.elementsearchWithTimeLimit(wdriver, JobStatus_xpath,2);
+        WebElement JobStatus = WebElementSearcher.elementsearchFluentWait(wdriver, JobStatus_xpath);
         System.out.println(JobStatus);
 
 

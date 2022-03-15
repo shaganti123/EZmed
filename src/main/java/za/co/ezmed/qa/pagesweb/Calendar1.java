@@ -70,11 +70,11 @@ public class Calendar1 extends BaseClass {
 
     public  void buttons(String CalenderIcon) throws InterruptedException {
         JSWaiter.setDriver(this.wdriver);
-        JSWaiter.waitJQueryAngular();
+        JSWaiter.waitUntilAngularReady();
         if(CalenderIcon.equalsIgnoreCase("DOB"))
         {
             JSWaiter.setDriver(this.wdriver);
-            JSWaiter.waitJQueryAngular();
+            JSWaiter.waitUntilAngularReady();;
             seleniumAction.clickWebElementObject(DOB);
         }
         else if (CalenderIcon.equalsIgnoreCase("Start"))
@@ -91,7 +91,7 @@ public class Calendar1 extends BaseClass {
         {
             JSWaiter.setDriver(this.wdriver);
             JSWaiter.waitJQueryAngular();
-         WebElement Treat= WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,TreatmentStart,20);
+            WebElement Treat= WebElementSearcher.elementsearchSettlementCondition(wdriver,TreatmentStart);
             Treat.click();
         }
         else if (CalenderIcon.equalsIgnoreCase("EFFFrom"))

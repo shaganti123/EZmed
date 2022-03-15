@@ -20,10 +20,9 @@ public class WebElementSearcher
    public static WebElement elementsearchSettlementCondition( WebDriver wdriver,By searchMethod)
    {
 
-      DocumentSettleCondition <WebElement> settleCondition = new DocumentSettleCondition(
-              ExpectedConditions.visibilityOfElementLocated(searchMethod));
+      DocumentSettleCondition <WebElement> settleCondition = new DocumentSettleCondition(ExpectedConditions.visibilityOfElementLocated(searchMethod));
               return new FluentWait<>(wdriver)
-              .withTimeout(Duration.ofMinutes(10))
+              .withTimeout(Duration.ofMinutes(3))
               .pollingEvery(Duration.ofMillis(settleCondition.getSettleTime()))
               .ignoring(WebDriverException.class)
               .until(settleCondition);
@@ -54,7 +53,7 @@ public class WebElementSearcher
    public static WebElement elementsearchFluentWait( WebDriver wdriver,By searchMethod)
    {
       Wait<WebDriver> wait = new FluentWait<>(wdriver)
-              .withTimeout(Duration.ofMinutes(1))
+              .withTimeout(Duration.ofSeconds(30))
               .pollingEvery(Duration.ofSeconds(2))
               .ignoring(WebDriverException.class);
 
@@ -78,7 +77,7 @@ public class WebElementSearcher
    {
 
       Wait<WebDriver> wait = new FluentWait(wdriver)
-              .withTimeout(Duration.ofMinutes(maxWaitTime))
+              .withTimeout(Duration.ofSeconds(maxWaitTime))
               .pollingEvery(Duration.ofSeconds(2))
               .ignoring(WebDriverException.class);
 

@@ -86,7 +86,7 @@ public class ActionButtons extends BaseClass {
             {
                 JSWaiter.setDriver(this.wdriver);
                 JSWaiter.waitUntilAngularReady();
-                WebElement Proceed = WebElementSearcher.elementsearchWithTimeLimit(wdriver,ProceedBy,5);
+                WebElement Proceed = WebElementSearcher.elementsearchWithTimeLimit(wdriver,ProceedBy,6);
                 Proceed.click();
             }
              else if (p.equalsIgnoreCase("Clone")){
@@ -129,13 +129,12 @@ public class ActionButtons extends BaseClass {
             for (int rowNum = 2; rowNum <= rowCount; rowNum++)
             {
                 System.out.println(rowCount);
-
                 String IcdCode = reader.getCellData(sheetName, "IcdDesc", rowNum);
                 EnterCode.sendKeys(IcdCode);
                 seleniumAction.clickWebElementObject(CodeSearchB);
                 JSWaiter.setDriver(this.wdriver);
                 JSWaiter.waitUntilAngularReady();
-                WebElement ICDAction = WebElementSearcher.elementsearchSettlementCondition(wdriver,ICDActionBy );
+                WebElement ICDAction = WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,ICDActionBy,10 );
                 ICDAction.click();
                 break;
             }
@@ -164,7 +163,7 @@ public class ActionButtons extends BaseClass {
                 Waitforelement();
                 EnterCode.sendKeys(IcdCode);
                 seleniumAction.clickWebElementObject(CodeSearchB);
-                WebElement ICDAction = WebElementSearcher.elementsearchSettlementCondition(wdriver,ICDActionBy );
+                WebElement ICDAction = WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,ICDActionBy,15 );
                 ICDAction.click();
                 Waitforelement();
                 seleniumAction.scrollDown();

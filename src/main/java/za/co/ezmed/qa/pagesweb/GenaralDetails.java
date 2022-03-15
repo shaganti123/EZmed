@@ -78,6 +78,7 @@ public class GenaralDetails extends BaseClass {
     @FindBy(xpath = "//input[@placeholder='*** *** ****']")
     private WebElement Mobile;
 
+    public By PopUPText = By.xpath("//div[@class='toast toast-success']/div/div");
 
     String xpathOfRadio="//div[@class='radio-inline fa5']";
     String xpathOfCheck="//span[@class='checkbox-inline fa5']";
@@ -333,6 +334,7 @@ public void next(String next) throws InterruptedException {
     else if(next.equalsIgnoreCase("Save"))
        {
            Save.click();
+           new WebDriverWait(wdriver, 10).until(ExpectedConditions.invisibilityOfElementLocated(PopUPText));
 
        }
 

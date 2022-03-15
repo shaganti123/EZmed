@@ -6,6 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import za.co.ezmed.qa.utils.JSWaiter;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
 
@@ -23,6 +24,7 @@ public class DashboardPage extends BaseClass {
     private WebElement CookiesAccept;
     public By Home = By.xpath("//img[@id='ezmedLogo']");
     public By patients = By.xpath("//div[@class='thumbnail']//i[@class='fal fa-4x fa-user-circle']");
+    JavascriptExecutor js = (JavascriptExecutor)wdriver;
     SeleniumAction seleniumAction;
     public DashboardPage (WebDriver driver)
     {
@@ -37,9 +39,10 @@ public class DashboardPage extends BaseClass {
             } catch (Exception e) {
 
             }
-
-        WebElement patient=WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,patients,20);
-        patient.click();
+        JSWaiter.setDriver(this.wdriver);
+        JSWaiter.waitJQueryAngular();
+        WebElement patient=WebElementSearcher.elementsearchFluentWait(wdriver,patients);
+        js.executeScript("arguments[0].click()", patient);
     }
 
     public void Providers() throws InterruptedException {

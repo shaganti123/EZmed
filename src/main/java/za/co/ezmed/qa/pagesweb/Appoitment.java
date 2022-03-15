@@ -3,6 +3,7 @@ package za.co.ezmed.qa.pagesweb;
 import Base.BaseClass;
 import Base.SeleniumAction;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -44,6 +45,9 @@ public class Appoitment extends BaseClass {
         JSWaiter.waitJQueryAngular();
         List<WebElement> elementLocator = wdriver.findElements(By.xpath("//tbody/tr/td[@role='gridcell']"));
         ImplicitWait();
+        //JavascriptExecutor js = (JavascriptExecutor) wdriver;
+      //  WebElement e=elementLocator.get(1);
+     //   js.executeScript("arguments[0].doubleClick();",e);
         actions.doubleClick(elementLocator.get(5)).perform();
         JSWaiter.waitJQueryAngular();
         Select P = new Select(Provider);

@@ -44,6 +44,7 @@ public class Claim extends BaseClass {
 
     private By CreateClaim = By.xpath("//button[@class='btn pull-right btn-success btn-margin-bottom-10']");
     private By Committ = By.xpath("//button[@uib-tooltip='Post this claim to the financial system']");
+    JavascriptExecutor js = (JavascriptExecutor) wdriver;
 
 
     public Claim(WebDriver driver) {
@@ -65,10 +66,10 @@ public class Claim extends BaseClass {
 
     public boolean CreateClaim() throws InterruptedException {
         JSWaiter.setDriver(this.wdriver);
-        JSWaiter.waitJQueryAngular();
+        JSWaiter.waitUntilAngularReady();
         WebElement Create = WebElementSearcher.elementsearchSettlementConditionWithTimeLimit(wdriver,CreateClaim,20);
         ImplicitWait();
-        seleniumAction.clickWebElementObject(Create);
+        js.executeScript("arguments[0].click()", Create);
         WebElement P = WebElementSearcher.elementsearchFluentWait(wdriver,RP);
        if (P.isDisplayed())
         {

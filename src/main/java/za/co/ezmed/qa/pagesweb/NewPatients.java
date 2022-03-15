@@ -52,10 +52,10 @@ SeleniumAction seleniumAction;
 
         seleniumAction.waitForElementToBeClickable(PatientSearch);
         seleniumAction.typeText(PatientSearch,PId);
-        WebElement PSearch =WebElementSearcher.elementsearchWithTimeLimit(wdriver,NoPatient,5);
+       // WebElement PSearch =WebElementSearcher.elementsearchWithTimeLimit(wdriver,NoPatient,5);
         //seleniumAction.clickWebElementObject(Actions);
         Waitforelement();
-        WebElement Act =WebElementSearcher.elementsearchWithTimeLimit(wdriver,Actions1,5);
+        WebElement Act =WebElementSearcher.elementsearchWithTimeLimit(wdriver,Actions1,6);
         Act.click();
         return true;
     }
