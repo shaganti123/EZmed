@@ -66,11 +66,7 @@ public class BatchProcesses extends BaseClass {
     public void BatchP() throws InterruptedException {
         JSWaiter.setDriver(this.wdriver);
         JSWaiter.waitJQueryAngular();
-        try {
-            CookiesAccept.click();
-        } catch (Exception e) {
-
-        }
+        ImplicitWait();
         WebElement Batch = WebElementSearcher.elementsearchSettlementCondition(wdriver, BatchProcessing);
         JavascriptExecutor js = (JavascriptExecutor)wdriver;
         js.executeScript("arguments[0].click()", Batch);

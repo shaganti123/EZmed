@@ -1,13 +1,6 @@
-14:15:53,221 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (2cf93bc71e9d66345ad9b8e48d371fc4)] -> xpath: //select[@name='PatientType']]
-14:16:44,130 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (2cf93bc71e9d66345ad9b8e48d371fc4)] -> xpath: //select[@name='PatientType']]
-14:26:35,265 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (2cf93bc71e9d66345ad9b8e48d371fc4)] -> xpath: //button[contains(text(),'Create')]]
-14:29:35,816 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
-14:29:35,819 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
-14:29:35,821 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
-14:29:35,821 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
-14:29:35,822 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
-14:29:36,137 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
-14:29:36,137 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
-14:29:36,138 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
-14:29:36,138 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
-14:29:36,139 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
+15:01:12,107 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (0ae35bc7787a4f2b34fe93e81737a441)] -> xpath: //select[@name='PatientType']]
+15:10:36,710 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (0ae35bc7787a4f2b34fe93e81737a441)] -> xpath: //button[@uib-tooltip='Expand/Collapse panel']]
+15:11:11,470 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (0ae35bc7787a4f2b34fe93e81737a441)] -> xpath: //button[contains(text(),'Create')]]
+15:12:19,373 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (0ae35bc7787a4f2b34fe93e81737a441)] -> xpath: //div[@class='col-md-12 hidden-md hidden-sm hidden-xs']/date-quick-links//button[contains(text(),'This Week')]]
+15:12:20,747 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (0ae35bc7787a4f2b34fe93e81737a441)] -> xpath: //button/span[contains(text(),'Search')]]
+15:17:24,937 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (0ae35bc7787a4f2b34fe93e81737a441)] -> xpath: //button/span[contains(text(),'Search')]]
