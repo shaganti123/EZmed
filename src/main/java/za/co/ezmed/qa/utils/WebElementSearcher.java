@@ -22,7 +22,7 @@ public class WebElementSearcher
 
       DocumentSettleCondition <WebElement> settleCondition = new DocumentSettleCondition(ExpectedConditions.visibilityOfElementLocated(searchMethod));
               return new FluentWait<>(wdriver)
-              .withTimeout(Duration.ofMinutes(3))
+              .withTimeout(Duration.ofMinutes(5))
               .pollingEvery(Duration.ofMillis(settleCondition.getSettleTime()))
               .ignoring(WebDriverException.class)
               .until(settleCondition);

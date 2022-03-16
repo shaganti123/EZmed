@@ -4,8 +4,12 @@ import Base.BaseClass;
 import Base.SeleniumAction;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import za.co.ezmed.qa.utils.Screenshot;
 import za.co.ezmed.qa.utils.WebElementSearcher;
+
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -52,6 +56,44 @@ public class LoginPage extends BaseClass
 
     public void loginPage(String un, String pw ) throws InterruptedException
     {
+        for(int i=0;i<3;i++)
+        {
+            System.out.println("In for loop");
+            try
+            {
+                if(wdriver.findElements(usernameBy).size()>0)
+                {
+                    System.out.println("Element found");
+                    WebElement username =WebElementSearcher.elementsearchSettlementCondition(wdriver,usernameBy);
+                    seleniumAction.typeText(username,un);
+                    try {
+                        CookiesAccept.click();
+                    } catch(NoSuchElementException e) {
+                    }
+                    WebElement password=WebElementSearcher.elementsearchFluentWait(wdriver,passwordBy);
+                    seleniumAction.typeText(password,pw);
+                    Screenshot.takeScreenshot(wdriver);
+                    seleniumAction.clickWebElementObject(loginbutton);
+                    WebElement home=WebElementSearcher.elementsearchSettlementCondition(wdriver,Home);
+                    home.click();
+                    i=3;
+                }
+                else
+                {
+                    System.out.println("Element not found"+i+" try");
+                    wdriver.navigate().refresh();
+                    wdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+                    i++;
+                }
+            }
+            catch(NoSuchElementException e)
+            {
+                System.out.println(e);
+            }
+
+        /*
+
+
         WebElement username =WebElementSearcher.elementsearchSettlementCondition(wdriver,usernameBy);
         seleniumAction.typeText(username,un);
         try {
@@ -64,6 +106,9 @@ public class LoginPage extends BaseClass
         seleniumAction.clickWebElementObject(loginbutton);
         WebElement home=WebElementSearcher.elementsearchSettlementCondition(wdriver,Home);
         home.click();
+
+         */
+    }
     }
 
     public void logout() throws InterruptedException {

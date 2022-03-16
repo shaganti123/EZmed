@@ -18,7 +18,7 @@
         <parameter name="MEDate" value="20/02/2022"></parameter>
         <parameter name="IODTDate" value="28/02/2022"></parameter>
         <parameter name="MATDate" value="16/02/2022"></parameter>
-        <parameter name="ClaimStatus" value="Fund - Not Payable"></parameter>
+        <parameter name="ClaimStatus" value="Submitted To Funder"></parameter>
         <parameter name="Action" value="Clone"></parameter>
         <parameter name="PhysioIns" value="Physio"></parameter>
         <parameter name="OT" value="Curae Occupational Therapy"></parameter>
@@ -41,7 +41,7 @@
                     <include name="CloneClaim"/>
                     <exclude name="CreatePartialPayment"/>
                     <include name="CreateFullPayment"/>
-                    <include name="DeletePatient"/>
+                    <exclude name="DeletePatient"/>
                     <exclude name="DeleteProvider"/>
                     <include name="BatchProcess"/>
                 </methods>

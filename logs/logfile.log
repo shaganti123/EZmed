@@ -1,14 +1,11 @@
-06:08:00,202 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (e1448fd56978d58c7f6dda307f1d93b6)] -> xpath: //select[@name='PatientType']]
-06:08:49,933 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (e1448fd56978d58c7f6dda307f1d93b6)] -> xpath: //select[@name='PatientType']]
-06:16:20,589 ERROR SeleniumAction:198 - Text not successfully typed into textfield Notes
-06:18:16,372 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (e1448fd56978d58c7f6dda307f1d93b6)] -> xpath: //button[contains(text(),'Create')]]
-06:23:59,411 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
-06:23:59,412 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
-06:23:59,413 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
-06:23:59,414 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
-06:23:59,414 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
-06:23:59,726 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
-06:23:59,727 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
-06:23:59,728 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
-06:23:59,728 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
-06:23:59,729 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
+11:54:32,254 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (c5a52d3bdd2b400588967544cbf8be82)] -> xpath: //div[@class='navbar-header hidden-xs']/a/img]
+12:04:46,317 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
+12:04:46,318 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
+12:04:46,319 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
+12:04:46,319 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
+12:04:46,320 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
+12:04:46,577 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
+12:04:46,577 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
+12:04:46,577 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
+12:04:46,578 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
+12:04:46,578 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
