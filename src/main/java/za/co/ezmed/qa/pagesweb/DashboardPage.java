@@ -40,7 +40,8 @@ public class DashboardPage extends BaseClass {
 
             }
         JSWaiter.setDriver(this.wdriver);
-        JSWaiter.waitJQueryAngular();
+        JSWaiter.waitForAngularLoad();
+        ImplicitWait();
         WebElement patient=WebElementSearcher.elementsearchFluentWait(wdriver,patients);
         js.executeScript("arguments[0].click()", patient);
     }
