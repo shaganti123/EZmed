@@ -121,7 +121,7 @@ public class BatchProcesses extends BaseClass {
         List<WebElement> r = wdriver.findElements(By.xpath(RadioButtons));
         r.get(1).click();
         seleniumAction.clickWebElementObject(Search);
-        WebElement JobStatus = WebElementSearcher.elementsearchFluentWait(wdriver, JobStatus_xpath);
+        WebElement JobStatus = WebElementSearcher.elementsearchSettlementCondition(wdriver, JobStatus_xpath);
         System.out.println(JobStatus);
 
 

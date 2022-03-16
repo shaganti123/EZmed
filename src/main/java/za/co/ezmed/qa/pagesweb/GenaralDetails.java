@@ -334,7 +334,7 @@ public void next(String next) throws InterruptedException {
     else if(next.equalsIgnoreCase("Save"))
        {
            Save.click();
-           new WebDriverWait(wdriver, 10).until(ExpectedConditions.invisibilityOfElementLocated(PopUPText));
+           new WebDriverWait(wdriver, 20).until(ExpectedConditions.invisibilityOfElementLocated(PopUPText));
 
        }
 
