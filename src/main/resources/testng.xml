@@ -41,7 +41,7 @@
                     <include name="CloneClaim"/>
                     <exclude name="CreatePartialPayment"/>
                     <include name="CreateFullPayment"/>
-                    <exclude name="DeletePatient"/>
+                    <include name="DeletePatient"/>
                     <exclude name="DeleteProvider"/>
                     <include name="BatchProcess"/>
                 </methods>

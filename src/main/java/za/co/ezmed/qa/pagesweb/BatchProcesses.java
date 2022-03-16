@@ -90,9 +90,17 @@ public class BatchProcesses extends BaseClass {
         JSWaiter.waitJQueryAngular();
         seleniumAction.clickWebElementObject(Search);
         JSWaiter.waitJQueryAngular();
-        WebElement select = WebElementSearcher.elementsearchSettlementCondition(wdriver, SelAll);
-        executor.executeScript("arguments[0].scrollIntoView(true);",select);
-        executor.executeScript("arguments[0].click()", select);
+        try{
+            WebElement select = WebElementSearcher.elementsearchSettlementCondition(wdriver, SelAll);
+            executor.executeScript("arguments[0].scrollIntoView(true);",select);
+            executor.executeScript("arguments[0].click()", select);}
+        catch (Exception e){
+            JSWaiter.waitJQueryAngular();
+            seleniumAction.clickWebElementObject(Search);
+            WebElement select = WebElementSearcher.elementsearchSettlementCondition(wdriver, SelAll);
+            executor.executeScript("arguments[0].scrollIntoView(true);",select);
+            executor.executeScript("arguments[0].click()", select);}
+
         WebElement Lasts = WebElementSearcher.elementsearchSettlementCondition(wdriver, Last);
         executor.executeScript("arguments[0].scrollIntoView(true);",Lasts);
         seleniumAction.clickWebElementObject(Lasts);

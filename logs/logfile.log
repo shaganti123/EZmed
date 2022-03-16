@@ -1,11 +1,13 @@
-11:54:32,254 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (c5a52d3bdd2b400588967544cbf8be82)] -> xpath: //div[@class='navbar-header hidden-xs']/a/img]
-12:04:46,317 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
-12:04:46,318 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
-12:04:46,319 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
-12:04:46,319 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
-12:04:46,320 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
-12:04:46,577 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
-12:04:46,577 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
-12:04:46,577 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
-12:04:46,578 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
-12:04:46,578 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
+14:15:53,221 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (2cf93bc71e9d66345ad9b8e48d371fc4)] -> xpath: //select[@name='PatientType']]
+14:16:44,130 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (2cf93bc71e9d66345ad9b8e48d371fc4)] -> xpath: //select[@name='PatientType']]
+14:26:35,265 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (2cf93bc71e9d66345ad9b8e48d371fc4)] -> xpath: //button[contains(text(),'Create')]]
+14:29:35,816 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
+14:29:35,819 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
+14:29:35,821 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
+14:29:35,821 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
+14:29:35,822 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
+14:29:36,137 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
+14:29:36,137 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
+14:29:36,138 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
+14:29:36,138 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
+14:29:36,139 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"

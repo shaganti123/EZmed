@@ -56,7 +56,7 @@ public class LoginPage extends BaseClass
 
     public void loginPage(String un, String pw ) throws InterruptedException
     {
-        for(int i=0;i<3;i++)
+        for(int i=0;i<5;i++)
         {
             System.out.println("In for loop");
             try
@@ -76,14 +76,13 @@ public class LoginPage extends BaseClass
                     seleniumAction.clickWebElementObject(loginbutton);
                     WebElement home=WebElementSearcher.elementsearchSettlementCondition(wdriver,Home);
                     home.click();
-                    i=3;
+                    i=5;
                 }
                 else
                 {
                     System.out.println("Element not found"+i+" try");
                     wdriver.navigate().refresh();
-                    wdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-                    i++;
+                    Thread.sleep(20000);
                 }
             }
             catch(NoSuchElementException e)
