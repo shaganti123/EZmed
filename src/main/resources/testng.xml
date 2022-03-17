@@ -18,7 +18,7 @@
         <parameter name="MEDate" value="20/02/2022"></parameter>
         <parameter name="IODTDate" value="28/02/2022"></parameter>
         <parameter name="MATDate" value="16/02/2022"></parameter>
-        <parameter name="ClaimStatus" value="Submitted To Funder"></parameter>
+        <parameter name="ClaimStatus" value="Fund"></parameter>
         <parameter name="Action" value="Clone"></parameter>
         <parameter name="PhysioIns" value="Physio"></parameter>
         <parameter name="OT" value="Curae Occupational Therapy"></parameter>

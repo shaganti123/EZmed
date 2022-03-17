@@ -1,12 +1,16 @@
-19:26:02,390 ERROR SeleniumAction:111 - Element not successfully clicked Proxy element for: DefaultElementLocator 'By.xpath: //body/div[1]/div[1]/div[1]/div[3]/button[2][not(@disabled)]'
-19:26:14,002 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (ef2e4c2370c3806de73aebeba4790be0)] -> xpath: //div[@class='navbar-header hidden-xs']/a/img]
-19:26:55,970 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
-19:26:55,972 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
-19:26:55,973 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
-19:26:55,974 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
-19:26:55,974 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
-19:26:56,264 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
-19:26:56,264 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
-19:26:56,265 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
-19:26:56,265 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
-19:26:56,265 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/Users/laxmis/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
+11:03:59,686 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (258a6aff3e83e6223cbb0aa01b67cd6b)] -> xpath: //select[@name='PatientType']]
+11:04:54,457 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (258a6aff3e83e6223cbb0aa01b67cd6b)] -> xpath: //select[@name='PatientType']]
+11:15:40,191 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (258a6aff3e83e6223cbb0aa01b67cd6b)] -> xpath: //button[@uib-tooltip='Expand/Collapse panel']]
+11:16:35,714 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (258a6aff3e83e6223cbb0aa01b67cd6b)] -> xpath: //div[@class='col-md-12 hidden-md hidden-sm hidden-xs']/date-quick-links//button[contains(text(),'This Week')]]
+11:16:37,069 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (258a6aff3e83e6223cbb0aa01b67cd6b)] -> xpath: //button/span[contains(text(),'Search')]]
+11:21:41,893 ERROR SeleniumAction:111 - Element not successfully clicked [[ChromeDriver: chrome on WINDOWS (258a6aff3e83e6223cbb0aa01b67cd6b)] -> xpath: //button/span[contains(text(),'Search')]]
+11:27:55,701 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
+11:27:55,703 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
+11:27:55,705 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
+11:27:55,706 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
+11:27:55,707 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/WINDOWS/system32/config/systemprofile/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
+11:27:56,202 DEBUG cache:44 - Couldn't find template in cache for "Extent.ftl"("en_ZA", UTF-8, parsed); will try to load it.
+11:27:56,202 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en_ZA.ftl"): Not found
+11:27:56,203 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent_en.ftl"): Not found
+11:27:56,203 DEBUG cache:44 - TemplateLoader.findTemplateSource("Extent.ftl"): Found
+11:27:56,203 DEBUG cache:44 - Loading template for "Extent.ftl"("en_ZA", UTF-8, parsed) from "jar:file:/C:/WINDOWS/system32/config/systemprofile/.m2/repository/com/relevantcodes/extentreports/2.41.2/extentreports-2.41.2.jar!/com/relevantcodes/extentreports/view/Extent.ftl"
