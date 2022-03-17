@@ -7,8 +7,8 @@
 
     <test verbose="2" preserve-order="true" name="C:/Users/laxmis/IdeaProjects/EZmed">
         <parameter name="Environment" value="https://ezmed.spesstage.co.za/"></parameter>
-        <parameter name="UserName" value="yvetter@spesnet.co.za"></parameter>
-        <parameter name="Password" value="Trevorlr!1"></parameter>
+        <parameter name="UserName" value="laxmis@spesnet.co.za"></parameter>
+        <parameter name="Password" value="Passwordq!"></parameter>
         <parameter name="PID" value="860213059086"></parameter>
         <parameter name="CTdate" value="28-Feb-2022"></parameter>
         <parameter name="PatientFunder" value="Rand Mutual Assurance"></parameter>
